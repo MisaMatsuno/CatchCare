@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To run the project, in an repo out side of the project:
+```
+$ gem install foreman
+```
+In the project repo:
+```
+$ bundle && yarn
+$ foreman start -f Procfile.dev -p 3000
+```
 
-Things you may want to cover:
+The pages partially implemented (5/27):
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+/index
+/forum
+/solution
+/designer
+/myaccount
+/myaccount/1/personalinfo
+```
