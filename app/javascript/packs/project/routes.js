@@ -10,6 +10,7 @@ import Forum from './components/forumPage'
 import Designer from './components/designerPage'
 import Personal from './components/personalPage'
 import Personalinfo from './components/personalinfoPage'
+import Signup from './components/signUpPage'
 
 const App = (props) => (
   <Router>
@@ -21,6 +22,7 @@ const App = (props) => (
       <Route exact path='/designer' component={Designer} />
       <Route exact path='/myaccount' component={Personal} />
       <Route exact path='/myaccount/1/personalinfo' component={Personalinfo} />
+      <Route exact path='/myaccount/new' component={Signup}/>
     </div>
   </Router>
 )

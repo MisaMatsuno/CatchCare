@@ -2,7 +2,7 @@ import React from 'react';
 import {withRouter} from 'react-router-dom'
 import history from '../../history.js'
 import {
-MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
+MDBNavbar, MDBBtn, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
 MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBCol
 } from "mdbreact";
 
@@ -10,17 +10,15 @@ class Header extends React.Component {
  
   constructor(props){
     super(props);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 	state = {
   	isOpen: false
 	};
 
-  handleKeyPress(e) {
-    if (e.key === 'Enter') {
-        history.push('/solution') 
-    }
+  handleSubmit(e) {
+      this.props.history.push('/solution') 
 }
 
 	toggleCollapse = () =>{
@@ -50,7 +48,7 @@ class Header extends React.Component {
             <MDBNavItem>
               <MDBFormInline waves>
                 <div className="md-form my-0">
-                  <input className="form-control mr-sm-2" type="text" onKeyUp={this.handleKeyPress} placeholder="Search" aria-label="Search" />
+                  <input className="form-control mr-sm-2" type="text" onSubmit={this.handleSubmit} placeholder="Search" aria-label="Search" />
                 </div>
               </MDBFormInline>
             </MDBNavItem>
