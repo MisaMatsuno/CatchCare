@@ -7,6 +7,7 @@ $ gem install foreman
 In the project repo:
 ```
 $ bundle && yarn
+$ bin/rails db:migrate
 $ foreman start -f Procfile.dev -p 3000
 ```
 
