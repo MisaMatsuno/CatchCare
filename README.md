@@ -10,7 +10,7 @@ $ bundle && yarn
 $ foreman start -f Procfile.dev -p 3000
 ```
 
-The pages partially implemented (5/27):
+The pages partially implemented (5/29):
 
 ```
 /index
@@ -19,4 +19,5 @@ The pages partially implemented (5/27):
 /designer
 /myaccount
 /myaccount/1/personalinfo
+/myaccount/new
 ```
