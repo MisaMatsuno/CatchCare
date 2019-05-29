@@ -9,6 +9,7 @@ class Signup extends React.Component{
     type: 'user',
     name: null,
     username: null,
+    password: null,
     create: null
 
   }
@@ -20,7 +21,8 @@ class Signup extends React.Component{
   }
 
   handleChange(e){
-    if(e.target.id === 'username')this.setState({username:e.target.value});
+    if(e.target.id === 'name')this.setState({name:e.target.value});
+    if(e.target.id === 'email')this.setState({username:e.target.value});
     if(e.target.id === 'password')this.setState({password:e.target.value});
     if(e.target.id === 'user' || e.target.id === 'designer'){
       var button1 = document.getElementById('user');
@@ -44,12 +46,8 @@ class Signup extends React.Component{
   }
 
   handleSubmit(e){
-
+    this.props.onFormSubmit()
   }
-
-
-
-
 
 	render(){
 		return(
@@ -92,14 +90,15 @@ class Signup extends React.Component{
         </MDBRow>
         </div>
         <div id = "form" style = {{visibility: "hidden"}}>
-        <form>
+
+        <form onSubmit={(event) => this.handleSubmit(event)}>
             <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
               Your name
             </label>
             <input
-              id = 'name'
+              id='name'
               type="text"
-              id="defaultFormRegisterNameEx"
+              onChange={this.handleChange}
               className="form-control"
             />
             <br />
@@ -107,9 +106,9 @@ class Signup extends React.Component{
               Your email
             </label>
             <input
-              id = 'email'
+              id='email'
               type="email"
-              id="defaultFormRegisterEmailEx"
+              onChange={this.handleChange}
               className="form-control"
             />
             <br />
@@ -135,10 +134,10 @@ class Signup extends React.Component{
             <input
               id = 'password'
               type="password"
-              id="defaultFormRegisterPasswordEx"
+              onChange={this.handleChange}
               className="form-control"
             />
-        <div className="text-center mb-4 mt-5">
+            <div className="text-center mb-4 mt-5">
                 <MDBBtn
                   color = 'purple'
                   type="submit"
@@ -146,8 +145,9 @@ class Signup extends React.Component{
                 >
                   Create Account
                 </MDBBtn>
-              </div>
-            </form>
+            </div>
+        </form>
+
             <p className="font-small grey-text d-flex justify-content-center">
                 Already have an account?
                 <a
@@ -156,8 +156,8 @@ class Signup extends React.Component{
                 >
                   Log in
                 </a>
-              </p>
-              </div>
+            </p>
+        </div>
          </MDBCol>
       </MDBRow>
     </MDBContainer>	
