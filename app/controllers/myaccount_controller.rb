@@ -1,6 +1,5 @@
 class MyaccountController < ApplicationController
 	def index
-		@myaccount = @myaccount.all
 	end
 
 	def personalinfo
