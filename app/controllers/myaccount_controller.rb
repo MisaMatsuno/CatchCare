@@ -19,7 +19,7 @@ class MyaccountController < ApplicationController
 		if @myaccount.save
 			redirect_to @myaccount
 		else
-			render myaccounts_url
+			render 'new'
 		end
 	end
 
