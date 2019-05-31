@@ -46,7 +46,19 @@ class Signup extends React.Component{
   }
 
   handleSubmit(e){
-    this.props.onFormSubmit()
+
+    fetch('/myaccount', {
+      method: 'POST',
+      body: JSON.stringify({name:this.state.name, username:this.state.username, password:this.state.password}),
+      headers:{
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials':true,
+          'Access-Control-Allow-Methods':'POST, GET',
+          "Content-Type": "application/json"
+        }
+    }).then(res => res.json())
+      .then(data=>{
+            alert(data)});
   }
 
 	render(){
