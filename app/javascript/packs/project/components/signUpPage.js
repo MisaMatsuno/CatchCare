@@ -61,7 +61,7 @@ class Signup extends React.Component{
           "Content-Type": "application/json"
       }
     }).then(res => res.json())
-      .then(data => alert(data.name))
+      .then(data => alert(data.state))
       .then(this.props.history.push('/login'))
 
   }
