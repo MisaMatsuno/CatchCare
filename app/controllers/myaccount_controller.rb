@@ -11,7 +11,7 @@ class MyaccountController < ApplicationController
 	end
 	
 	def show
-		@myaccount = myaccount.find(params[:id])
+		@myaccount = Myaccount.find(params[:id])
 	end
 
 	def create
@@ -19,7 +19,7 @@ class MyaccountController < ApplicationController
 		if @myaccount.save
 			redirect_to @myaccount
 		else
-			render 'new'
+			render myaccounts_url
 		end
 	end
 
