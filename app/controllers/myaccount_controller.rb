@@ -17,9 +17,9 @@ class MyaccountController < ApplicationController
 	def create
 		@myaccount = Myaccount.new(account_params)
 		if @myaccount.save
-			redirect_to @myaccount
+			render json: @myaccount
 		else
-			render 'new'
+			render json: @myaccount.errors, status: :unprocessable_entity
 		end
 	end
 

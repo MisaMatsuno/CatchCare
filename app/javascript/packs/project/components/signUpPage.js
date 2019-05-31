@@ -61,7 +61,8 @@ class Signup extends React.Component{
           "Content-Type": "application/json"
       }
     }).then(res => res.json())
-      .then(data => {alert(data)});
+      .then(data => alert(data.name))
+      .then(this.props.history.push('/login'))
 
   }
 
@@ -151,11 +152,11 @@ class Signup extends React.Component{
               </div>
             </form>
 
-            <p className = "font-small grey-text d-flex justify-content-center">
+            <p className="font-small grey-text d-flex justify-content-center">
               Already have an account?
             <a
-              href = "/login"
-              className = "dark-grey-text font-weight-bold ml-1">
+              href="/login"
+              className="dark-grey-text font-weight-bold ml-1">
               Log in
             </a>
             </p>
@@ -165,7 +166,7 @@ class Signup extends React.Component{
           </MDBRow>
         </MDBContainer>	
 			
-			  <div style = {{position: 'relative', top:'300px', width:"100%"}}>
+			  <div style={{position: 'relative', top:'300px', width:"100%"}}>
     		  <Footer></Footer>
     	  </div>
     	</div>
