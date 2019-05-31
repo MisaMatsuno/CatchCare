@@ -48,15 +48,6 @@ class Login extends React.Component{
             </div>
             <MDBCardBody className="mx-4 mt-4">
               <MDBInput id='username' label="User ID" group type="text" validate />
-              <p className="font-small grey-text d-flex justify-content-end">
-                Forgot
-                <a
-                  href="#!"
-                  className="dark-grey-text font-weight-bold ml-1"
-                >
-                  User ID?
-                </a>
-              </p>
               <MDBInput
                 id = 'password'
                 label="Password"

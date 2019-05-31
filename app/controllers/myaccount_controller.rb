@@ -17,10 +17,10 @@ class MyaccountController < ApplicationController
 	def create
 		@myaccount = Myaccount.new(account_params)
 		if Myaccount.where(:username => @myaccount.username).exists?
-			render json: {"state": "FAIL", "message": "This email address has been registered!"}
+			render json: {state: "FAIL", message: "This email address has been registered!"}
 		else
 			if @myaccount.save
-				render json: {"state": "OK", "message": "You have successfully created an account!"}
+				render json: {state: "OK", message: "You have successfully created an account!"}
 			else
 				render json: @myaccount.errors, status: :unprocessable_entity
 			end

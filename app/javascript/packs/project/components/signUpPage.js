@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './comps/Header'
 import Footer from './comps/Footer'
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
-
 class Signup extends React.Component{
 
   state = {
@@ -11,7 +10,8 @@ class Signup extends React.Component{
     name: null,
     username: null,
     password: null,
-    create: null
+    create: null,
+    redirect: true
 
   }
 
@@ -50,7 +50,7 @@ class Signup extends React.Component{
   }
 
   handleSubmit(e){
-
+    e.preventDefault()
     fetch('/myaccount', {
       method: 'POST',
       body: JSON.stringify({name: this.state.name, username: this.state.username, password: this.state.password}),
@@ -61,9 +61,16 @@ class Signup extends React.Component{
           "Content-Type": "application/json"
       }
     }).then(res => res.json())
-      .then(data => alert(data.state))
-      .then(this.props.history.push('/login'))
-
+      .then(data => {
+        if(data.state ==='OK'){
+          alert(data.message);
+          this.props.history.push('/login');
+        }
+        else{
+          alert(data.message);
+        }
+      })
+      
   }
 
 	render(){
