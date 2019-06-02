@@ -6,6 +6,10 @@ import {MDBCard, MDBCarousel, MDBListGroup, MDBListGroupItem,MDBCarouselCaption,
 "mdbreact";
 
 class Personal extends React.Component {
+  constructor(props){
+    super(props);
+    console.log(this.props.id)
+  }
   render() {
     return(
       <div className = "App">
@@ -18,13 +22,13 @@ class Personal extends React.Component {
       <MDBCol md='3'>
       <MDBCard style={{ width: "200px", marginTop: "1rem", backgroundColor: "#6351ce" }}>
     <MDBListGroup>
-      <MDBListGroupItem hover waves href="/designer">Designer's Tab</MDBListGroupItem>
-      <MDBListGroupItem hover waves href="/myaccount/1/personalinfo">Personal Info</MDBListGroupItem>
-      <MDBListGroupItem hover waves href="#">Order</MDBListGroupItem>
-      <MDBListGroupItem hover waves href="#">Favourites</MDBListGroupItem>
-      <MDBListGroupItem hover waves href="#">Settings</MDBListGroupItem>
-      <MDBListGroupItem hover waves href="#">Payment</MDBListGroupItem>
-      <MDBListGroupItem hover waves href="#">Security</MDBListGroupItem>
+      <MDBListGroupItem hover href="/designer">Designer's Tab</MDBListGroupItem>
+      <MDBListGroupItem hover href="/myaccount/1/personalinfo">Personal Info</MDBListGroupItem>
+      <MDBListGroupItem hover href="#">Order</MDBListGroupItem>
+      <MDBListGroupItem hover href="#">Favourites</MDBListGroupItem>
+      <MDBListGroupItem hover href="#">Settings</MDBListGroupItem>
+      <MDBListGroupItem hover href="#">Payment</MDBListGroupItem>
+      <MDBListGroupItem hover href="#">Security</MDBListGroupItem>
     </MDBListGroup>
   </MDBCard>
       </MDBCol>

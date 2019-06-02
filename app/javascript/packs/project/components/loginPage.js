@@ -24,8 +24,8 @@ class Login extends React.Component{
 
   handleSubmit(e){
     e.preventDefault()
-    fetch('/myaccount', {
-      method: 'GET',
+    fetch('/login', {
+      method: 'POST',
       body: JSON.stringify({username: this.state.username, password: this.state.password}),
       headers: {
           'Access-Control-Allow-Origin': '*',
@@ -35,7 +35,13 @@ class Login extends React.Component{
       }
     }).then(res => res.json())
       .then(data => {
-          alert(data.id)
+          if(data==null){
+            alert("Wrong username or password")
+          }
+          else{
+            alert("Find user id" + data[0].id);
+            this.props.history.push("/myaccount/"+data[0].id)
+          }
       })
   }
 
@@ -86,7 +92,6 @@ class Login extends React.Component{
                   color = 'purple'
                   type="submit"
                   className="btn-block z-depth-2 white-text"
-                  href = "/myaccount"
                 >
                   Log in
                 </MDBBtn>
