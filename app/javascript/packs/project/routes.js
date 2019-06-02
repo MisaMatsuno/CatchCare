@@ -20,8 +20,7 @@ const App = (props) => (
       <Route exact path='/solution' component={Solution} />
       <Route exact path='/forum' component={Forum} />
       <Route exact path='/designer' component={Designer} />
-      <Route exact path='/myaccount/1/personalinfo' component={Personalinfo} />
-      <Route path='/myaccount/:id' component={Personal} />
+      <Route exact path='/myaccount/:id/personal' component={Personalinfo} />
       <Route exact path='/myaccount/new' component={Signup}/>
     </div>
   </Router>

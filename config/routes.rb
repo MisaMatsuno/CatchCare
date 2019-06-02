@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :designer
   resources :myaccount do
   	member do
-  		get 'personalinfo'
+  		get 'personal'
   	end
   end
   root 'welcome#index'

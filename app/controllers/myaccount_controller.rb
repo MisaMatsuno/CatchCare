@@ -5,7 +5,7 @@ class MyaccountController < ApplicationController
     end
 
 
-	def personalinfo
+	def personal
 	end
 
 	def new
