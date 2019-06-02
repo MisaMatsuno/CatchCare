@@ -32,6 +32,6 @@ class MyaccountController < ApplicationController
 
 	private
 		def account_params
-			params.require(:myaccount).permit(:name,:username,:password)
+			params.require(:myaccount).permit(:name, :username, :password)
 		end
 end
