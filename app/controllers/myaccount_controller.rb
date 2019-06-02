@@ -1,11 +1,10 @@
 class MyaccountController < ApplicationController
 	protect_from_forgery with: :null_session
-	def index
-		
+	def index	
     end
 
 
-	def personal
+	def personalinfo
 	end
 
 	def new
@@ -30,8 +29,21 @@ class MyaccountController < ApplicationController
 		end
 	end
 
+	def update
+		@myaccount = Myaccount.find(params[:username])
+		if @myaccount.update_attributes(detail_params)
+		  render json: {state: "OK", message: ""}	
+		else
+		  render json: {state: "FAIL", message: ""}
+		end
+	end
+
 	private
 		def account_params
 			params.require(:myaccount).permit(:name, :username, :password)
+		end
+	
+		def detail_params
+			params.require(:myaccount).permit(:name, :username, :password, :birth, :phone, :gender, :interest)	
 		end
 end
