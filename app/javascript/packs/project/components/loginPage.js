@@ -23,7 +23,20 @@ class Login extends React.Component{
   }
 
   handleSubmit(e){
-      this.props.history.push('/myaccount');
+    e.preventDefault()
+    fetch('/myaccount', {
+      method: 'GET',
+      body: JSON.stringify({username: this.state.username, password: this.state.password}),
+      headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials':true,
+          'Access-Control-Allow-Methods':'POST, GET',
+          "Content-Type": "application/json"
+      }
+    }).then(res => res.json())
+      .then(data => {
+          alert(data.id)
+      })
   }
 
 
@@ -47,12 +60,15 @@ class Login extends React.Component{
               </MDBRow>
             </div>
             <MDBCardBody className="mx-4 mt-4">
-              <MDBInput id='username' label="User ID" group type="text" validate />
+            <form onSubmit = {(event) => this.handleSubmit(event)}>
+              <MDBInput id='username' className = 'form-control' label="User ID" onInput={this.handleChange} group type="text" validate />
               <MDBInput
                 id = 'password'
                 label="Password"
                 group
                 type="password"
+                onInput = {this.handleChange}
+                className = 'form-control'
                 validate
                 containerClass="mb-0"
               />
@@ -68,13 +84,14 @@ class Login extends React.Component{
               <div className="text-center mb-4 mt-5">
                 <MDBBtn
                   color = 'purple'
-                  type="button"
+                  type="submit"
                   className="btn-block z-depth-2 white-text"
                   href = "/myaccount"
                 >
                   Log in
                 </MDBBtn>
               </div>
+              </form>
               <p className="font-small grey-text d-flex justify-content-center">
                 Don't have an account?
                 <a

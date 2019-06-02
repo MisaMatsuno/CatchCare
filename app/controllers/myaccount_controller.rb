@@ -1,7 +1,10 @@
 class MyaccountController < ApplicationController
 	protect_from_forgery with: :null_session
 	def index
-	end
+		@myaccount = Myaccount.where("username=? AND password=?", account_params)
+    	render json: @myaccount
+    end
+
 
 	def personalinfo
 	end
