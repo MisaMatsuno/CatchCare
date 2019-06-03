@@ -18,7 +18,8 @@ class Header extends React.Component {
 	};
 
   handleSubmit(e) {
-      this.props.history.push('/solution') 
+    e.preventDefault();
+    this.props.history.push('/solution') 
 }
 
 	toggleCollapse = () =>{

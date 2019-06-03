@@ -134,7 +134,7 @@ class Personal extends React.Component {
                 </MDBListGroupItem>
                 <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>
                   Birth
-                  <input id = 'birth' placeholder= {this.state.birth===''?"MM/DD/YYYY":this.state.birth} onChange = {this.handleChange} className="form-control" />
+                  <input id = 'birth' placeholder= {this.state.birth===''?"YYYY-MM-DD":this.state.birth} onChange = {this.handleChange} className="form-control" />
                 </MDBListGroupItem>
                 <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>
                   Phone
