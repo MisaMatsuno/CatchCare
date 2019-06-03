@@ -12,11 +12,11 @@ class Personal extends React.Component {
     birth: '',
     phone: '',
     interest: '',
-    radio: ""
+    radio: "",
+    type: ""
   }
   constructor(props){
     super(props);
-    console.log(this.props)
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -35,21 +35,31 @@ class Personal extends React.Component {
             this.props.history.push('/login');
           }
           else{
-            console.log(data.username)
             this.setState({name:data.name})
             this.setState({username:data.username})
             this.setState({birth:data.birth===null? '':data.birth})
             this.setState({phone:data.phone===null? '':data.phone})
             this.setState({interest:data.interest===null? '':data.interest})
-            this.setState({radio:data.gender===null? '':data.gender})
+            this.setState({radio:data.gender===null? '':data.gender}),
+            this.setState({type:data.type})
           }
       })
+
+      
   }
 
   onClick = nr => () => {
   this.setState({
     radio: nr
   });
+  }
+
+  componentDidMount(){
+    if(this.state.type===null || this.state.type==="user" || this.state.type ===''){
+        var designTab = document.getElementById('design');
+        designTab.className = 'list-group-item disabled list-group-item-action'
+
+      }
   }
 
   handleChange(e){
@@ -110,7 +120,7 @@ class Personal extends React.Component {
             <MDBCol md='3'>
               <MDBCard style={{ width: "200px", marginTop: "1rem", backgroundColor: "#6351ce" }}>
                 <MDBListGroup>
-                  <MDBListGroupItem hover href="/designer">Designer's Tab</MDBListGroupItem>
+                  <MDBListGroupItem hover id = 'design' href="/designer">Designer's Tab</MDBListGroupItem>
                   <MDBListGroupItem hover id = 'p1' onClick = {this.handleClick}>Personal Info</MDBListGroupItem>
                   <MDBListGroupItem hover href="#">Order</MDBListGroupItem>
                   <MDBListGroupItem hover href="#">Favourites</MDBListGroupItem>

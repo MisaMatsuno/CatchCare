@@ -11,11 +11,21 @@ class Header extends React.Component {
   constructor(props){
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
 	state = {
   	isOpen: false
 	};
+
+  handleClick(e){
+    if(localStorage.user==null || localStorage.user==undefined){
+      this.props.history.push('/login');
+    }
+    else{
+      this.props.history.push('/myaccount/'+localStorage.user+'/personal');
+      }
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -57,7 +67,7 @@ class Header extends React.Component {
           </MDBNavbarNav>
           <MDBNavbarNav right>
             <MDBNavItem>
-              <MDBNavLink to="/login">My Account</MDBNavLink>
+              <MDBNavLink onClick={this.handleClick} to="#!">My Account</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
               <MDBNavLink to="#!">Cart</MDBNavLink>

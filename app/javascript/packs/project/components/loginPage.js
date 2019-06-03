@@ -40,6 +40,7 @@ class Login extends React.Component{
           }
           else{
             alert("Find user id" + data[0].id);
+            localStorage.setItem('user', data[0].id);
             this.props.history.push("/myaccount/"+data[0].id +'/personal')
           }
       })
