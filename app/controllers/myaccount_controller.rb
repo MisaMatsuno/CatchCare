@@ -30,11 +30,11 @@ class MyaccountController < ApplicationController
 	end
 
 	def update
-		@myaccount = Myaccount.find(params[:username])
+		@myaccount = Myaccount.find(params[:id])
 		if @myaccount.update_attributes(detail_params)
-		  render json: {state: "OK", message: ""}	
+		  render json: {state: "OK", message: "Success"}	
 		else
-		  render json: {state: "FAIL", message: ""}
+		  render json: {state: "FAIL", message: @myaccount.errors}
 		end
 	end
 
@@ -44,6 +44,6 @@ class MyaccountController < ApplicationController
 		end
 	
 		def detail_params
-			params.require(:myaccount).permit(:name, :username, :password, :birth, :phone, :gender, :interest)	
+			params.require(:myaccount).permit(:id, :name, :username, :password, :birth, :phone, :gender, :interest)	
 		end
 end

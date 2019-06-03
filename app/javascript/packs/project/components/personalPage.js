@@ -8,7 +8,10 @@ import {MDBCard, MDBCarousel, MDBListGroup, MDBListGroupItem,MDBCarouselCaption,
 class Personal extends React.Component {
   state = {
     name: '',
-    email: '',
+    username: '',
+    birth: '',
+    phone: '',
+    interest: '',
     radio: ""
   }
   constructor(props){
@@ -16,6 +19,7 @@ class Personal extends React.Component {
     console.log(this.props)
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     fetch('/myaccount/'+this.props.match.params.id, {
       method: 'GET',
       headers: {
@@ -27,12 +31,17 @@ class Personal extends React.Component {
     }).then(res => res.json())
       .then(data => {
           if(data==null){
-            alert("no name")
+            alert("Wrong Account");
+            this.props.history.push('/login');
           }
           else{
             console.log(data.username)
             this.setState({name:data.name})
-            this.setState({email:data.username})
+            this.setState({username:data.username})
+            this.setState({birth:data.birth===null? '':data.birth})
+            this.setState({phone:data.phone===null? '':data.phone})
+            this.setState({interest:data.interest===null? '':data.interest})
+            this.setState({radio:data.gender===null? '':data.gender})
           }
       })
   }
@@ -44,7 +53,7 @@ class Personal extends React.Component {
   }
 
   handleChange(e){
-
+    this.setState({[e.target.id]:e.target.value})
   }
   handleClick(e){
     if(e.target.id==='p1'){
@@ -52,46 +61,99 @@ class Personal extends React.Component {
       form.style.visibility = form.style.visibility === 'visible'? 'hidden' : 'visible';
     }
   }
+
+  handleSubmit(e){
+    //e.preventDefault()
+    var data = JSON.stringify({
+      id: this.props.match.params.id,
+      username: this.state.username,
+      name: this.state.name,
+      birth: this.state.birth,
+      phone: this.state.phone,
+      interest: this.state.interest,
+      gender: this.state.radio
+    })
+    fetch('/myaccount/'+this.props.match.params.id, {
+      method: 'PATCH',
+      body: data,
+      headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials':true,
+          'Access-Control-Allow-Methods':'POST, GET, PATCH',
+          "Content-Type": "application/json"
+      }
+    }).then(res => res.json())
+      .then(data => {
+        if(data.status==='OK'){
+          alert(data.message);
+          this.props.history.push('/myaccount/'+this.props.match.params.id)
+        }
+        else{
+          alert(data.message);
+        }
+      })
+  }
+
+
+
+
+
   render() {
     return(
       <div className = "App">
         <Header></Header>
         <MDBContainer fluid style={{position: 'relative', top:'100px', left:"20px", width:'100%'}}>   
-      <div className= 'text-center align-middle' style={{backgroundColor: "#6351ce",height:'90px', width:'200px'}}>
-       <p className="text-center white-text mb-4 mt-5"  style={{position: 'relative', top:'30%',fontSize:'20px'}}> My Account</p>
-      </div>
-      <MDBRow>
-      <MDBCol md='3'>
-      <MDBCard style={{ width: "200px", marginTop: "1rem", backgroundColor: "#6351ce" }}>
-    <MDBListGroup>
-      <MDBListGroupItem hover href="/designer">Designer's Tab</MDBListGroupItem>
-      <MDBListGroupItem hover id = 'p1' onClick = {this.handleClick}>Personal Info</MDBListGroupItem>
-      <MDBListGroupItem hover href="#">Order</MDBListGroupItem>
-      <MDBListGroupItem hover href="#">Favourites</MDBListGroupItem>
-      <MDBListGroupItem hover href="#">Settings</MDBListGroupItem>
-      <MDBListGroupItem hover href="#">Payment</MDBListGroupItem>
-      <MDBListGroupItem hover href="#">Security</MDBListGroupItem>
-    </MDBListGroup>
-  </MDBCard>
+          <div className= 'text-center align-middle' style={{backgroundColor: "#6351ce",height:'90px', width:'200px'}}>
+            <p className="text-center white-text mb-4 mt-5"  style={{position: 'relative', top:'30%',fontSize:'20px'}}> My Account</p>
+          </div>
+          <MDBRow>
+            <MDBCol md='3'>
+              <MDBCard style={{ width: "200px", marginTop: "1rem", backgroundColor: "#6351ce" }}>
+                <MDBListGroup>
+                  <MDBListGroupItem hover href="/designer">Designer's Tab</MDBListGroupItem>
+                  <MDBListGroupItem hover id = 'p1' onClick = {this.handleClick}>Personal Info</MDBListGroupItem>
+                  <MDBListGroupItem hover href="#">Order</MDBListGroupItem>
+                  <MDBListGroupItem hover href="#">Favourites</MDBListGroupItem>
+                  <MDBListGroupItem hover href="#">Settings</MDBListGroupItem>
+                  <MDBListGroupItem hover href="#">Payment</MDBListGroupItem>
+                  <MDBListGroupItem hover href="#">Security</MDBListGroupItem>
+                </MDBListGroup>
+              </MDBCard>
 
   
-      </MDBCol>
-      <MDBCol  id = 'personalform' style={{visibility:'hidden'}} md='6'>
-      <MDBCard style={{marginTop: "1rem",}}>
-      <MDBListGroupItem hover className="d-flex justify-content-between align-items-center">Name 
-      <input className="form-control" style = {{width:"600px"}} onChange = {this.handleChange} value = {this.state.name}/> </MDBListGroupItem>
-      <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>Email <input className="form-control" style = {{width:"600px"}} onChange = {this.handleChange} value = {this.state.email}/></MDBListGroupItem>
-      <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>Birth<input placeholder= "MM/DD/YYYY" className="form-control" style = {{width:"600px"}}/></MDBListGroupItem>
-      <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>Phone<input placeholder= "(XXX)XXX-XXXX" className="form-control" style = {{width:"600px"}}/></MDBListGroupItem>
-      <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>Gender
-      <MDBFormInline>
-        <MDBInput gap onClick={this.onClick(1)} checked={this.state.radio===1 ? true : false} label="Male" type="radio" id="radio1" />
-        <MDBInput gap onClick={this.onClick(2)} checked={this.state.radio===2 ? true : false} label="Female" type="radio" id="radio2" />
-      </MDBFormInline></MDBListGroupItem>
-      <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>Interest Areas<input className="form-control" style = {{width:"600px"}}/></MDBListGroupItem>
-    </MDBCard>
-      </MDBCol>
-      </MDBRow>
+            </MDBCol>
+            <MDBCol  id = 'personalform' style={{visibility:'hidden'}} md='6'>
+              <MDBCard style={{marginTop: "1rem",}}>
+                <MDBListGroupItem hover className="d-flex justify-content-between align-items-center">
+                  Name 
+                  <input id = 'name' className="form-control" onChange = {this.handleChange} value = {this.state.name} required/> 
+                </MDBListGroupItem>
+                <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>
+                  Email 
+                  <input id = 'username' className="form-control"  onChange = {this.handleChange} value = {this.state.username} required/>
+                </MDBListGroupItem>
+                <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>
+                  Birth
+                  <input id = 'birth' placeholder= {this.state.birth===''?"MM/DD/YYYY":this.state.birth} onChange = {this.handleChange} className="form-control" />
+                </MDBListGroupItem>
+                <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>
+                  Phone
+                  <input id = 'phone' placeholder= {this.state.phone===''?"(XXX)XXX-XXXX":this.state.phone} onChange = {this.handleChange} className="form-control" />
+                </MDBListGroupItem>
+                <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>Gender
+                  <MDBFormInline>
+                    <MDBInput gap onClick={this.onClick(1)} checked={this.state.radio===1 ? true : false} label="Male" type="radio" id="radio1" />
+                    <MDBInput gap onClick={this.onClick(2)} checked={this.state.radio===2 ? true : false} label="Female" type="radio" id="radio2" />
+                  </MDBFormInline>
+                </MDBListGroupItem>
+                <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>Interest Areas<input className="form-control" value = {this.state.interest} id = 'interest' onChange= {this.handleChange}/></MDBListGroupItem>
+                <form onSubmit = {this.handleSubmit}>
+                  <MDBBtn className = 'btn-purple white-text' type = "submit">Save</MDBBtn>
+                </form>
+              </MDBCard>
+    
+            </MDBCol>
+          </MDBRow>
       </MDBContainer>
 
       
