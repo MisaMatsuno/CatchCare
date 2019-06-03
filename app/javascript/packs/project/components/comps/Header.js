@@ -19,7 +19,8 @@ class Header extends React.Component {
 	};
 
   handleClick(e){
-    if(localStorage.user==null || localStorage.user==undefined){
+    console.log(localStorage)
+    if(localStorage.user==null || localStorage.user==undefined ||localStorage.user==''){
       this.props.history.push('/login');
     }
     else{

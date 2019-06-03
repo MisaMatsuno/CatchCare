@@ -4,7 +4,7 @@ class MyaccountController < ApplicationController
     end
 
 
-	def personalinfo
+	def personal
 	end
 
 	def new
@@ -13,11 +13,7 @@ class MyaccountController < ApplicationController
 	
 	def show
 		@myaccount = Myaccount.find(params[:id])
-		if @myaccount.exists?
-			render json: @myaccount
-		else
-			render json: {state: "FAIL", message: ""}
-		end
+		render json: @myaccount
 	end
 
 	def create
@@ -44,7 +40,7 @@ class MyaccountController < ApplicationController
 
 	private
 		def account_params
-			params.require(:myaccount).permit(:name, :username, :password)
+			params.require(:myaccount).permit(:name, :username, :password, :identity)
 		end
 	
 		def detail_params

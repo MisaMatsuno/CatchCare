@@ -53,7 +53,7 @@ class Signup extends React.Component{
     e.preventDefault()
     fetch('/myaccount', {
       method: 'POST',
-      body: JSON.stringify({name: this.state.name, username: this.state.username, password: this.state.password, type: this.state.type}),
+      body: JSON.stringify({name: this.state.name, username: this.state.username, password: this.state.password, identity: this.state.type}),
       headers: {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Credentials':true,

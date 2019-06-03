@@ -19,33 +19,7 @@ class Personal extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    fetch('/myaccount/'+this.props.match.params.id, {
-      method: 'GET',
-      headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials':true,
-          'Access-Control-Allow-Methods':'POST, GET',
-          "Content-Type": "application/json"
-      }
-    }).then(res => res.json())
-      .then(data => {
-          if(data==null){
-            alert("Wrong Account");
-            this.props.history.push('/login');
-          }
-          else{
-            this.setState({name:data.name})
-            this.setState({username:data.username})
-            this.setState({birth:data.birth===null? '':data.birth})
-            this.setState({phone:data.phone===null? '':data.phone})
-            this.setState({interest:data.interest===null? '':data.interest})
-            this.setState({radio:data.gender===null? '':data.gender}),
-            this.setState({type:data.type})
-          }
-      })
-
-      
+    this.handleSubmit = this.handleSubmit.bind(this)  
   }
 
   onClick = nr => () => {
@@ -55,11 +29,39 @@ class Personal extends React.Component {
   }
 
   componentDidMount(){
-    if(this.state.type===null || this.state.type==="user" || this.state.type ===''){
-        var designTab = document.getElementById('design');
-        designTab.className = 'list-group-item disabled list-group-item-action'
-
+    fetch('/myaccount/'+this.props.match.params.id, {
+      method: 'GET',
+      headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials':true,
+          'Access-Control-Allow-Methods':'POST, GET',
+          "Content-Type": "application/json"
       }
+    }).then(res => 
+    //{if(res.status===404){
+    //    alert("Wrong Account");
+    //    this.props.history.push('/login');
+    //  }
+      res.json())
+      .then(data => {
+            console.log(data)
+            this.setState({type:data.identity})
+            this.setState({name:data.name})
+            this.setState({username:data.username})
+            this.setState({birth:data.birth===null? '':data.birth})
+            this.setState({phone:data.phone===null? '':data.phone})
+            this.setState({interest:data.interest===null? '':data.interest})
+            this.setState({radio:data.gender===null? '':data.gender})
+
+            if(this.state.type==="user"){
+              var designTab = document.getElementById('design');
+              designTab.className = 'list-group-item disabled list-group-item-action'
+
+            }
+          
+      })
+    
+    
   }
 
   handleChange(e){
@@ -69,6 +71,11 @@ class Personal extends React.Component {
     if(e.target.id==='p1'){
       var form = document.getElementById('personalform');
       form.style.visibility = form.style.visibility === 'visible'? 'hidden' : 'visible';
+    }
+    if(e.target.id==='logout'){
+      localStorage.setItem('user','');
+      alert("Successfully logging out!");
+      this.props.history.push('/login');
     }
   }
 
@@ -127,6 +134,7 @@ class Personal extends React.Component {
                   <MDBListGroupItem hover href="#">Settings</MDBListGroupItem>
                   <MDBListGroupItem hover href="#">Payment</MDBListGroupItem>
                   <MDBListGroupItem hover href="#">Security</MDBListGroupItem>
+                  <MDBListGroupItem hover id = 'logout' onClick = {this.handleClick}>Log Out</MDBListGroupItem>
                 </MDBListGroup>
               </MDBCard>
 
