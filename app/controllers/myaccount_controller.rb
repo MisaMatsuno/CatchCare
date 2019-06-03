@@ -13,7 +13,11 @@ class MyaccountController < ApplicationController
 	
 	def show
 		@myaccount = Myaccount.find(params[:id])
-		render json: @myaccount
+		if @myaccount.exists?
+			render json: @myaccount
+		else
+			render json: {state: "FAIL", message: ""}
+		end
 	end
 
 	def create
