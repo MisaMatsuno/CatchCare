@@ -35,7 +35,7 @@ class Login extends React.Component{
       }
     }).then(res => res.json())
       .then(data => {
-          if(data==null){
+          if(data[0]==undefined){
             alert("Wrong username or password")
           }
           else{

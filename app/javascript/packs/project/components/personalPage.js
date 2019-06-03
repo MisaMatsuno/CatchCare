@@ -141,22 +141,22 @@ class Personal extends React.Component {
   
             </MDBCol>
             <MDBCol  id = 'personalform' style={{visibility:'hidden'}} md='6'>
-              <MDBCard style={{marginTop: "1rem",}}>
-                <MDBListGroupItem hover className="d-flex justify-content-between align-items-center">
-                  Name 
-                  <input id = 'name' className="form-control" onChange = {this.handleChange} value = {this.state.name} required/> 
+              <MDBCard >
+                <MDBListGroupItem hover className=" d-flex justify-content-between align-items-center">
+                  Name
+                  <input id = 'name' style={{width:'80%'}}className="form-control" onChange = {this.handleChange} value = {this.state.name} required/> 
                 </MDBListGroupItem>
                 <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>
                   Email 
-                  <input id = 'username' className="form-control"  onChange = {this.handleChange} value = {this.state.username} required/>
+                  <input id = 'username' style={{width:'80%'}} className="form-control"  onChange = {this.handleChange} value = {this.state.username} required/>
                 </MDBListGroupItem>
                 <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>
                   Birth
-                  <input id = 'birth' placeholder= {this.state.birth===''?"YYYY-MM-DD":this.state.birth} onChange = {this.handleChange} className="form-control" />
+                  <input id = 'birth' style={{width:'80%'}} placeholder= {this.state.birth===''?"YYYY-MM-DD":this.state.birth} onChange = {this.handleChange} className="form-control" />
                 </MDBListGroupItem>
                 <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>
                   Phone
-                  <input id = 'phone' placeholder= {this.state.phone===''?"(XXX)XXX-XXXX":this.state.phone} onChange = {this.handleChange} className="form-control" />
+                  <input id = 'phone' style={{width:'80%'}} placeholder= {this.state.phone===''?"(XXX)XXX-XXXX":this.state.phone} onChange = {this.handleChange} className="form-control" />
                 </MDBListGroupItem>
                 <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>Gender
                   <MDBFormInline>
@@ -164,12 +164,14 @@ class Personal extends React.Component {
                     <MDBInput gap onClick={this.onClick(2)} checked={this.state.radio===2 ? true : false} label="Female" type="radio" id="radio2" />
                   </MDBFormInline>
                 </MDBListGroupItem>
-                <MDBListGroupItem className="d-flex justify-content-between align-items-center" hover>Interest Areas<input className="form-control" value = {this.state.interest} id = 'interest' onChange= {this.handleChange}/></MDBListGroupItem>
-                <form onSubmit = {this.handleSubmit}>
-                  <MDBBtn className = 'btn-purple white-text' type = "submit">Save</MDBBtn>
-                </form>
+                <MDBListGroupItem className="d-flex justify-content-between align-items-right" hover>Interest Areas
+                  <input style={{width:'80%'}} className="form-control" value = {this.state.interest} id = 'interest' onChange= {this.handleChange}/>
+                </MDBListGroupItem>
+                
               </MDBCard>
-    
+              <form onSubmit = {this.handleSubmit}>
+                    <MDBBtn className = 'btn-purple white-text' type = "submit">Save</MDBBtn>
+              </form>
             </MDBCol>
           </MDBRow>
       </MDBContainer>
