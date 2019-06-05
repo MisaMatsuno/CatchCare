@@ -12,6 +12,14 @@ class Solution extends React.Component{
   activeItemPills: "1",
 }
 
+  constructor(props){
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(e){
+    this.prop.history.push("/products/1")
+  }
 
 
 togglePills = tab => () => {
@@ -33,31 +41,27 @@ togglePills = tab => () => {
         <Tabs defaultActiveKey="product" id="solution-tab">
           <Tab eventKey="product" title="Product">
           <MDBRow>
-          <MDBCol lg="3" md="6" className="mb-lg-0 mb-4">
+        <MDBCol lg="3" md="6" className="mb-lg-0 mb-4">
           <MDBCard cascade narrow ecommerce>
+            <a href="/products/1">
             <MDBCardImage
               cascade
-              src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/1.jpg"
+              src="https://img.alicdn.com/imgextra/i1/509554376/O1CN01zXorDP1iCFgoaomIz_!!509554376.jpg_430x430q90.jpg"
               top
               alt="sample photo"
               overlay="white-slight"
-            />
+              className = 'img-fluid'
+            /></a>
             <MDBCardBody cascade className="text-center">
-              <a href="#!" className="grey-text">
-                <h5>Denim</h5>
+              <a href="/products/1" className="grey-text">
+                <h5>Crutch</h5>
               </a>
               <MDBCardTitle>
                 <strong>
-                  <a href="#!">Denim trousers</a>
+                  <a href="/products/1">Double Crutch</a>
                 </strong>
               </MDBCardTitle>
-              </MDBCardBody>
-              </MDBCard>
-              </MDBCol >
-              <MDBCol lg="3" md="6" className="mb-lg-0 mb-4">
-              <MDBCard>
-              <MDBCardBody className="text-center">
-              <ul className="list-group list-group-horizontal list-unstyled">
+              <ul className="rating list-group list-unstyled justify-content-center list-group-horizontal">
                 <li>
                   <MDBIcon icon="star" />
                 </li>
@@ -75,28 +79,157 @@ togglePills = tab => () => {
                 </li>
               </ul>
               <MDBCardText>
-                Description Description
+                Neque porro quisquam est, qui dolorem ipsum quia dolor sit.
               </MDBCardText>
               <MDBCardFooter className="px-1">
                 <span className="float-left font-weight-bold">
                   <strong>49$</strong>
                 </span>
-                
               </MDBCardFooter>
-              <div>
-        <select className="browser-default custom-select">
-          <option>Quantity</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-        <MDBBtn className='white-text' color="purple">Add to cart</MDBBtn>
-        <MDBBtn className='white-text' color="purple">Buy it now</MDBBtn>
-      </div>
             </MDBCardBody>
           </MDBCard>
-          </MDBCol>
-          </MDBRow>
+        </MDBCol>
+        <MDBCol lg="3" md="6" className="mb-lg-0 mb-4">
+          <MDBCard cascade narrow ecommerce>
+            <MDBCardImage
+              cascade
+              src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/2.jpg"
+              top
+              alt="sample photo"
+              overlay="white-slight"
+            />
+            <MDBCardBody cascade className="text-center">
+              <a href="#!" className="grey-text">
+                <h5>Shoes</h5>
+              </a>
+              <MDBCardTitle>
+                <strong>
+                  <a href="#!">High heels</a>
+                </strong>
+              </MDBCardTitle>
+              <ul className="rating list-group list-unstyled justify-content-center list-group-horizontal">
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+              </ul>
+              <MDBCardText>
+                Neque porro quisquam est, qui dolorem ipsum quia dolor sit.
+              </MDBCardText>
+              <MDBCardFooter className="px-1">
+                <span className="float-left font-weight-bold">
+                  <strong>89$</strong>
+                </span>
+              
+              </MDBCardFooter>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBCol>
+        <MDBCol lg="3" md="6" className="mb-lg-0 mb-4">
+          <MDBCard cascade narrow ecommerce>
+            <MDBCardImage
+              cascade
+              src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/4.jpg"
+              top
+              alt="sample photo"
+              overlay="white-slight"
+            />
+            <MDBCardBody cascade className="text-center">
+              <a href="#!" className="grey-text">
+                <h5>Outwear</h5>
+              </a>
+              <MDBCardTitle>
+                <strong>
+                  <a href="#!">Brown coat</a>
+                </strong>
+              </MDBCardTitle>
+              <ul className="rating list-group list-unstyled justify-content-center list-group-horizontal">
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon far icon="star-half" />
+                </li>
+              </ul>
+              <MDBCardText>
+                Neque porro quisquam est, qui dolorem ipsum quia dolor sit.
+              </MDBCardText>
+              <MDBCardFooter className="px-1">
+                <span className="float-left font-weight-bold">
+                  <strong>59$</strong>
+                </span>
+
+              </MDBCardFooter>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBCol>
+        <MDBCol lg="3" md="6" className="mb-lg-0 mb-4">
+          <MDBCard cascade narrow ecommerce>
+            <MDBCardImage
+              cascade
+              src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/3.jpg"
+              top
+              alt="sample photo"
+              overlay="white-slight"
+            />
+            <MDBCardBody cascade className="text-center">
+              <a href="#!" className="grey-text">
+                <h5>Blouses</h5>
+              </a>
+              <MDBCardTitle>
+                <strong>
+                  <a href="#!">Shirt</a>
+                </strong>
+              </MDBCardTitle>
+              <ul className="rating list-group list-unstyled justify-content-center list-group-horizontal">
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon icon="star" />
+                </li>
+                <li>
+                  <MDBIcon far icon="star" />
+                </li>
+              </ul>
+              <MDBCardText>
+                Neque porro quisquam est, qui dolorem ipsum quia dolor sit.
+              </MDBCardText>
+              <MDBCardFooter className="px-1">
+                <span className="float-left font-weight-bold">
+                  <strong>119$</strong>
+                </span>
+              </MDBCardFooter>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBCol>
+      </MDBRow>
           </Tab>
           <Tab eventKey="tips" title="Tips">
             <Search></Search>
