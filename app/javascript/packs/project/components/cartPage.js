@@ -54,7 +54,7 @@ class Cart extends React.Component {
             return(
                 <div className = "App">
                     <Header></Header>
-                    <MDBContainer style={{position:"relative", top:'200px'}}>
+                    <MDBContainer style = {{position:"relative", top:'200px'}}>
                         <MDBRow className = "justify-content-center">
                             <MDBCol md = "8">
                                 <p className = "text-center mb-4 mt-0" style = {{fontSize: "30px"}}> 
@@ -77,7 +77,7 @@ class Cart extends React.Component {
             return(
                 <div name="App">
                     <Header></Header>
-                    <MDBContainer style={{position:"relative", top:'200px'}}>
+                    <MDBContainer style = {{position:"relative", top:'200px'}}>
                         <MDBRow className = "justify-content-center">
                             <p className = "text-center mb-4 mt-0" style = {{fontSize: "30px"}}> 
                                 Your Cart
@@ -99,13 +99,13 @@ class Cart extends React.Component {
                             <td>Outshine Double Crutch</td>
                             <td>$20 </td>
                             <td>1</td>
-                            <td><MDBBtn onClick={this.handleClick} className='white-text' color="purple">Remove</MDBBtn>
+                            <td><MDBBtn onClick = {this.handleClick} className = 'white-text' color = "purple">Remove</MDBBtn>
                             </td>
                             </tr>
                             </MDBTableBody>
                         </MDBTable>
                         <MDBRow className = "dflex justify-content-right">
-                            <MDBBtn className='white-text' color="purple">Proceed to checkout</MDBBtn>
+                            <MDBBtn className = 'white-text' color = "purple">Proceed to checkout</MDBBtn>
                         </MDBRow>
                     </MDBContainer>
                 </div>
