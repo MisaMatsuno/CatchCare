@@ -5,18 +5,30 @@ import { MDBBtn, MDBFormInline,MDBInput, MDBBtnGroup, MDBIcon, MDBCol, MDBRow, M
 import {MDBCard, MDBCarousel, MDBListGroup, MDBListGroupItem,MDBCarouselCaption, MDBCarouselInner, MDBCarouselItem, MDBView, MDBMask, MDBContainer } from
 "mdbreact";
 
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+
 class Cart extends React.Component {
-    state = {
-        
-	}
-	
+    
 	constructor(props) {
 	
 		super(props)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
+        this.handleClick = this.handleClick.bind(this)
+        this.state = {
+        cart: null
+        }
+    
+
 	
 	}
+
+    componentWillMount(){
+        var cart_count = localStorage.cart;
+        if (cart_count!=null && cart_count!=undefined && cart_count!='0'){
+            this.setState({cart:"1"});
+        }
+    }
 	
 	handleSubmit(e) {
 
@@ -27,8 +39,12 @@ class Cart extends React.Component {
 	handleChange(e) {
 
     } 
+    handleClick(e){
+        localStorage.setItem('cart',null)
+    }
     
     render() {
+        if(this.state.cart===null){
         return(
             <div className = "App">
                 <Header></Header>
@@ -63,7 +79,46 @@ class Cart extends React.Component {
                     </MDBRow>
                 </MDBContainer>
             </div>
-        )
+        )}
+        else{
+            return(
+                <div name="App">
+                <Header></Header>
+                <MDBContainer style={{position:"relative", top:'200px'}}>
+                <MDBRow className = "justify-content-center">
+                            <p className = "text-center mb-4 mt-0" style = {{fontSize: "30px"}}> 
+                                Your Cart
+                            </p>
+                            
+                    </MDBRow>
+
+
+                <MDBTable hover>
+                <MDBTableHead>
+                    <tr>
+                      <th>#</th>
+                      <th>Product</th>
+                      <th>Price</th>
+                      <th></th>
+                    </tr>
+                  </MDBTableHead>
+                  <MDBTableBody>
+                    <tr>
+                      <td>1</td>
+                      <td>Outshine Double Crutch</td>
+                      <td>$20 </td>
+                      <td><MDBBtn onClick={this.handleClick} className='white-text' color="purple">Remove</MDBBtn>
+                      </td>
+                    </tr>
+                  </MDBTableBody>
+                </MDBTable>
+                <MDBRow className = "dflex justify-content-right">
+                <MDBBtn className='white-text' color="purple">Proceed to checkout</MDBBtn>
+                </MDBRow>
+                </MDBContainer>
+                </div>
+                )
+        }
     }
 }
 export default Cart

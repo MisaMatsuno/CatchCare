@@ -58,7 +58,7 @@ togglePills = tab => () => {
               </a>
               <MDBCardTitle>
                 <strong>
-                  <a href="/products/1">Double Crutch</a>
+                  <a href="/products/1">Outshine Double Crutch</a>
                 </strong>
               </MDBCardTitle>
               <ul className="rating list-group list-unstyled justify-content-center list-group-horizontal">

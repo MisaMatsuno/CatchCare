@@ -8,11 +8,15 @@ MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBCol
 
 class Header extends React.Component {
  
+
   constructor(props) {
     
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.state = {
+      cart: "Cart"
+    }
 
   }
 
@@ -20,6 +24,13 @@ class Header extends React.Component {
     var search = document.getElementById('search');
     if(this.props.location.pathname==='/'){
       search.style.visibility='hidden';
+    }
+    var cart_count = localStorage.cart;
+    if (cart_count!=null && cart_count!=undefined && cart_count!='0'){
+      this.setState({cart:"Cart ("+cart_count+")"});
+    }
+    else{
+      this.setState({cart:"Cart"});
     }
   }
 
@@ -78,7 +89,7 @@ class Header extends React.Component {
               <MDBNavLink onClick={this.handleClick} to="#!">My Account</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="/cart">Cart</MDBNavLink>
+              <MDBNavLink to="/cart">{this.state.cart}</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>

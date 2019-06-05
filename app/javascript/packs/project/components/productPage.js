@@ -23,6 +23,10 @@ class Product extends React.Component {
   }
 
   handleClick(e){
+    if(e.target.id==='cart'){
+      alert("Successfully added to your cart!")
+      localStorage.setItem('cart','1')
+    }
     
   }
 
@@ -60,7 +64,7 @@ class Product extends React.Component {
           
           <div className = 'col-lg-8 col-md-8 col-sm-12'>
           
-          <p className = "text-center mb-2 mt-0 font-weight-bold" fontSize = '15' style = {{fontSize:'30px'}}> Double Crutch </p>
+          <p className = "text-center mb-2 mt-0 font-weight-bold" fontSize = '15' style = {{fontSize:'30px'}}> Outshine Double Crutch </p>
           
           
           <MDBListGroup>
@@ -105,7 +109,13 @@ class Product extends React.Component {
               </ul>
             </MDBListGroupItem>
 
-            <MDBListGroupItem className=" d-flex justify-content-between align-items-center" hover>Monthly Selling
+            <MDBListGroupItem className=" d-flex justify-content-between align-items-center" hover>Manufacturer
+                    <span className="float-left" style = {{fontSize:'20px', color:'purple'}}>
+                      Outshine
+                    </span>
+            </MDBListGroupItem>
+
+            <MDBListGroupItem className=" d-flex justify-content-between align-items-center" hover>Monthly Sales
                     <span className="float-left" style = {{fontSize:'20px', color:'purple'}}>
                       6
                     </span>
@@ -141,7 +151,7 @@ class Product extends React.Component {
           
            <MDBRow>
           <MDBCol md = '6' className="d-flex justify-content-center">
-            <MDBBtn className='white-text' color="purple">
+            <MDBBtn id = 'cart' onClick={this.handleClick} className='white-text' color="purple">
               Add to Cart
             </MDBBtn>
           </MDBCol>
