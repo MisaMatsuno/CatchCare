@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   		get 'personal'
   	end
   end
+  resources :products
   root 'welcome#index'
 
 end
