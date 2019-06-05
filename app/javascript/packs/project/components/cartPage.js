@@ -40,7 +40,9 @@ class Cart extends React.Component {
 
     } 
     handleClick(e){
-        localStorage.setItem('cart',null)
+        localStorage.setItem('cart','0')
+        alert('Removed 1 item')
+        this.props.history.push('/cart')
     }
     
     render() {
@@ -99,6 +101,7 @@ class Cart extends React.Component {
                       <th>#</th>
                       <th>Product</th>
                       <th>Price</th>
+                      <th>Quantity</th>
                       <th></th>
                     </tr>
                   </MDBTableHead>
@@ -107,6 +110,7 @@ class Cart extends React.Component {
                       <td>1</td>
                       <td>Outshine Double Crutch</td>
                       <td>$20 </td>
+                      <td>1</td>
                       <td><MDBBtn onClick={this.handleClick} className='white-text' color="purple">Remove</MDBBtn>
                       </td>
                     </tr>
