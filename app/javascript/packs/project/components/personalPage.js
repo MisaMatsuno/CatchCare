@@ -55,8 +55,8 @@ class Personal extends React.Component {
 
             if(this.state.type==="user"){
               var designTab = document.getElementById('design');
-              designTab.className = 'list-group-item disabled list-group-item-action'
-
+              //designTab.className = 'list-group-item disabled list-group-item-action'
+              designTab.style.visibility = 'hidden'
             }
           
       })
