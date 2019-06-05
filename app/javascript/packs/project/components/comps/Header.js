@@ -16,6 +16,13 @@ class Header extends React.Component {
 
   }
 
+  componentDidMount(){
+    var search = document.getElementById('search');
+    if(this.props.location.pathname==='/'){
+      search.style.visibility='hidden';
+    }
+  }
+
 	state = {
   	isOpen: false
 	};
@@ -57,7 +64,7 @@ class Header extends React.Component {
               <MDBNavLink to="/forum">Forum</MDBNavLink>
             </MDBNavItem>
 
-            <MDBNavItem>
+            <MDBNavItem id = 'search' style={{visibility:"visible"}}>
               <MDBFormInline waves>
                 <div className="md-form my-0">
                   <input className="form-control mr-sm-2" type="text" onSubmit={this.handleSubmit} placeholder="Search" aria-label="Search" />
@@ -71,7 +78,7 @@ class Header extends React.Component {
               <MDBNavLink onClick={this.handleClick} to="#!">My Account</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="#!">Cart</MDBNavLink>
+              <MDBNavLink to="/cart">Cart</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
