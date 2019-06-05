@@ -162,6 +162,8 @@ class Personal extends React.Component {
                   <MDBFormInline>
                     <MDBInput gap onClick={this.onClick(1)} checked={this.state.radio===1 ? true : false} label="Male" type="radio" id="radio1" />
                     <MDBInput gap onClick={this.onClick(2)} checked={this.state.radio===2 ? true : false} label="Female" type="radio" id="radio2" />
+                    <MDBInput gap onClick={this.onClick(3)} checked={this.state.radio===3 ? true : false} label="Transgender" type="radio" id="radio3" />
+                    <MDBInput gap onClick={this.onClick(4)} checked={this.state.radio===4 ? true : false} label="Other" type="radio" id="radio4" />
                   </MDBFormInline>
                 </MDBListGroupItem>
                 <MDBListGroupItem className="d-flex justify-content-between align-items-right" hover>Interest Areas
