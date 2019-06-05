@@ -23,15 +23,15 @@ class Header extends React.Component {
   componentDidMount() {
 
     var search = document.getElementById('search');
-    if(this.props.location.pathname==='/') {
-      search.style.visibility='hidden'
+    if(this.props.location.pathname === '/') {
+      search.style.visibility = 'hidden'
     }
     var cart_count = localStorage.cart;
-    if(cart_count!=null && cart_count!=undefined && cart_count!='0') {
-      this.setState({cart:"Cart ("+cart_count+")"})
+    if(cart_count != null && cart_count != undefined && cart_count != '0') {
+      this.setState({cart: "Cart (" + cart_count + ")"})
     }
     else {
-      this.setState({cart:"Cart"})
+      this.setState({cart: "Cart"})
     }
 
   }
