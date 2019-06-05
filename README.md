@@ -11,14 +11,17 @@ $ bin/rails db:migrate
 $ foreman start -f Procfile.dev -p 3000
 ```
 
-The pages partially implemented (5/29):
+The pages partially implemented (6.5):
 
 ```
 /index
 /forum
 /solution
+/products/1
+/cart
 /designer
+/login
 /myaccount
-/myaccount/1/personalinfo
+/myaccount/:id/personalinfo
 /myaccount/new
 ```
