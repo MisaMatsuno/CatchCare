@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :solution
   resources :forum
   resources :designer
+  resources :cart
   resources :myaccount do
   	member do
   		get 'personal'

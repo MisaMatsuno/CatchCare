@@ -8,10 +8,12 @@ MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBCol
 
 class Header extends React.Component {
  
-  constructor(props){
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+  constructor(props) {
+    
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+
   }
 
 	state = {

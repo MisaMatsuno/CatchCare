@@ -10,6 +10,7 @@ import Forum from './components/forumPage'
 import Designer from './components/designerPage'
 import Personal from './components/personalPage'
 import Signup from './components/signUpPage'
+import Cart from './components/cartPage'
 
 const App = (props) => (
   <Router>
@@ -20,7 +21,8 @@ const App = (props) => (
       <Route exact path='/forum' component={Forum} />
       <Route exact path='/designer' component={Designer} />
       <Route exact path='/myaccount/:id/personal' component={Personal} />
-      <Route exact path='/myaccount/new' component={Signup}/>
+      <Route exact path='/myaccount/new' component={Signup} />
+      <Route exact path='/cart' component={Cart} /> 
     </div>
   </Router>
 )
