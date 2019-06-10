@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './comps/Header'
 import Footer from './comps/Footer'
 import Search from './comps/Search'
+import Posts from './comps/Posts'
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
 import {Nav} from 'react-bootstrap'
 class Login extends React.Component{
@@ -36,7 +37,7 @@ class Login extends React.Component{
   </Nav.Item>
 </Nav>
 
-<Search></Search>
+<Posts></Posts>
 
         		</MDBContainer>
 			<div style={{position: 'relative', top:'300px', width:"100%"}}>
