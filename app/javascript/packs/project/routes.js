@@ -18,8 +18,8 @@ const App = (props) => (
     <div>
       <Route exact path='/' component={LandingPage} />
       <Route exact path='/login' component={Login} />
-      <Route exact path='/solution' component={Solution} />
       <Route exact path='/forum' component={Forum} />
+      <Route exact path='/solution' component={Solution} />
       <Route exact path='/designer' component={Designer} />
       <Route exact path='/myaccount/:id/personal' component={Personal} />
       <Route exact path='/myaccount/new' component={Signup} />

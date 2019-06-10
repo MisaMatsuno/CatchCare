@@ -183,6 +183,8 @@ togglePills = tab => () => {
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
+
+
         <MDBCol lg="3" md="6" className="mb-lg-0 mb-4">
           <MDBCard cascade narrow ecommerce>
             <MDBCardImage
@@ -229,6 +231,7 @@ togglePills = tab => () => {
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
+
       </MDBRow>
           </Tab>
           <Tab eventKey="tips" title="Tips">
