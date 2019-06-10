@@ -40,11 +40,13 @@ class Cart extends React.Component {
     } 
 
     handleClick(e){
-
-        localStorage.setItem('cart','0')
-        this.setState({cart:null})
-        alert('Removed 1 item')
-        this.props.history.push('/cart')
+        if(e.target.id==='redirect')this.props.history.push('/')
+        else{
+            localStorage.setItem('cart','0')
+            this.setState({cart:null})
+            alert('Removed 1 item')
+            this.props.history.push('/cart')
+        }
 
     }
     
@@ -64,8 +66,8 @@ class Cart extends React.Component {
                                     Continue Shopping on the CatchCare homepage, learn about today's deals. 
                                 </p>
                                 <div className = 'text-center mb-4 mt-5'>
-                                    <MDBBtn color = 'purple' type = 'submit' className = 'btn-block z-depth-2 white-text'>
-                                        <a href='/'> Continue Shopping </a>
+                                    <MDBBtn id='redirect' color = 'purple' onClick={this.handleClick} type = 'submit' className = 'btn-block z-depth-2 white-text'>
+                                         Continue Shopping
                                     </MDBBtn>
                                 </div>
                             </MDBCol>
