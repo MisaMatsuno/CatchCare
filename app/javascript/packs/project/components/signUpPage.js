@@ -10,6 +10,7 @@ class Signup extends React.Component{
     name: null,
     username: null,
     password: null,
+    comfirm: null,
     create: null,
     redirect: true
 
@@ -46,30 +47,37 @@ class Signup extends React.Component{
       var form = document.getElementById('form');
       form.style.visibility = 'visible';
     }
+    if(e.target.id ==='confirm')this.setState({confirm:e.target.value})
 
   }
 
   handleSubmit(e){
     e.preventDefault()
-    fetch('/myaccount', {
-      method: 'POST',
-      body: JSON.stringify({name: this.state.name, username: this.state.username, password: this.state.password, identity: this.state.type}),
-      headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials':true,
-          'Access-Control-Allow-Methods':'POST, GET',
-          "Content-Type": "application/json"
-      }
-    }).then(res => res.json())
-      .then(data => {
-        if(data.state ==='OK'){
-          alert(data.message);
-          this.props.history.push('/login');
+    if(this.state.password != this.state.confirm){
+      var warn = document.getElementById('warn')
+      warn.style.visibility = 'visible'
+    }
+    else{
+      fetch('/myaccount', {
+        method: 'POST',
+        body: JSON.stringify({name: this.state.name, username: this.state.username, password: this.state.password, identity: this.state.type}),
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials':true,
+            'Access-Control-Allow-Methods':'POST, GET',
+            "Content-Type": "application/json"
         }
-        else{
-          alert(data.message);
-        }
-      })
+      }).then(res => res.json())
+        .then(data => {
+          if(data.state ==='OK'){
+            alert(data.message);
+            this.props.history.push('/login');
+          }
+          else{
+            alert(data.message);
+          }
+        })
+    }
       
   }
 
@@ -129,23 +137,23 @@ class Signup extends React.Component{
                 className = "form-control"/>
               <br />
               <label
-                htmlFor = "defaultFormRegisterConfirmEx"
-                className = "grey-text">
-                Confirm your email
-              </label>
-              <input
-                id = 'confirm'
-                type = "email"
-                id = "defaultFormRegisterConfirmEx"
-                className = "form-control"/>
-              <br />
-              <label
                 htmlFor = "defaultFormRegisterPasswordEx"
                 className = "grey-text">
                 Your password
               </label>
               <input
                 id = 'password'
+                type = "password"
+                onChange = {this.handleChange}
+                className = "form-control"/>
+              <br />
+              <label
+                htmlFor = "defaultFormRegisterConfirmEx"
+                className = "grey-text">
+                Confirm your password
+              </label>
+              <input
+                id = 'confirm'
                 type = "password"
                 onChange = {this.handleChange}
                 className = "form-control"/>
@@ -157,6 +165,9 @@ class Signup extends React.Component{
                   Create Account
                 </MDBBtn>
               </div>
+              <p style={{visibility:'hidden'}} id = 'warn' className="font-small red-text d-flex justify-content-center">
+               Your passwords differ.
+              </p>
             </form>
 
             <p className="font-small grey-text d-flex justify-content-center">
