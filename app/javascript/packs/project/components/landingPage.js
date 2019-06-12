@@ -27,7 +27,7 @@ class LandingPage extends React.Component {
 			query: this.state.query
 		})
 		//console.log(this.props.location.pathname)
-		this.props.history.push('/solution')
+		this.props.history.push('/solution?queryKey=crutch')
 
 	}
 	

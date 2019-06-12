@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './comps/Header'
 import Footer from './comps/Footer'
 import Search from './comps/Search'
+import queryString from 'query-string'
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardFooter, MDBIcon, MDBTooltip,  MDBBadge, MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBBtn } from "mdbreact";
 import {Tabs, Tab, TabContainer, TabContent, TabPane } from 'react-bootstrap'
 
@@ -9,8 +10,9 @@ import {Tabs, Tab, TabContainer, TabContent, TabPane } from 'react-bootstrap'
 class Solution extends React.Component{
 
   state = {
-  activeItemPills: "1",
-}
+    activeItemPills: "1",
+    products: []
+  }
 
   constructor(props){
     super(props)
@@ -29,6 +31,37 @@ togglePills = tab => () => {
     });
   }
 }
+
+
+  componentDidMount() {
+
+    fetch('/solution', {
+      method: 'POST',
+      body: JSON.stringify({name: queryString.parse(this.props.location.search).queryKey}),
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials':true,
+        'Access-Control-Allow-Methods':'POST, GET',
+        "Content-Type": "application/json"
+      }
+    }).then(res => 
+        res.json())
+        .then(data => {
+          var tmp = [];
+          for(var i = 0; i < data.length; i++) {
+            var product = {
+              id: data[i].id,
+              name: data[i].name,
+              detail: data[i].detail
+            }
+            tmp.push(product)
+          }
+          this.setState({products: tmp});
+          console.log(this.state)
+        })
+    
+  }
+
 	render(){
 
 

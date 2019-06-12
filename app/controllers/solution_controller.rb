@@ -3,7 +3,9 @@ class SolutionController < ApplicationController
 		@products = Product.all
 	end
 
-	def show
-		@product = Product.find(params[:id])
+	def create
+		@products = Product.where("name=?", params[:name])
+    	render json: @products
 	end
+
 end

@@ -7,3 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Product.create(name: 'Hang Yuan', detail: 'balabala')
+Product.create(name: 'crutch', detail: 'balabala')
