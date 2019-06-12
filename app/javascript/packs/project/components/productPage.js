@@ -21,7 +21,9 @@ class Product extends React.Component {
     monthly_sales: '', 
     review: '',
     in_stock: '',
-    kind: ''
+    kind: '',
+    quantity: '',
+    select_category: ''
 
   }
 
@@ -29,6 +31,7 @@ class Product extends React.Component {
 
     super(props)
     this.handleClick = this.handleClick.bind(this)
+    this.handleChange = this.handleChange.bind(this)
 
   }
 
@@ -67,12 +70,19 @@ class Product extends React.Component {
   handleClick(e){
 
     if(e.target.id==='cart'){
-      alert("Successfully added to your cart!")
+      //alert("Successfully added to your cart!")
+      alert(this.state.quantity)
       localStorage.setItem('cart','1')
     }
     
   }
 
+  handleChange(e){
+
+    this.setState({[e.target.id]:e.target.value})
+
+
+  }
 
   render() {
 
@@ -186,8 +196,8 @@ class Product extends React.Component {
             </MDBListGroupItem>
              <MDBListGroupItem className=" d-flex justify-content-between align-items-center" hover>Quantity
                    
-                    <input placeholder = '0' style ={{width:"10%"}} className="quantity" name="quantity" onChange={()=> console.log('change')}
-                    type="number" />                    
+                    <input placeholder = '0' style ={{width:"15%"}} className="form-control" id="quantity" onChange={this.handleChange} 
+                    type="number" value={this.state.quantity}/>                    
                                
             </MDBListGroupItem>
                   
