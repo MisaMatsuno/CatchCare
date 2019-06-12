@@ -37,7 +37,7 @@ togglePills = tab => () => {
 
     fetch('/solution', {
       method: 'POST',
-      body: JSON.stringify({name: queryString.parse(this.props.location.search).queryKey}),
+      body: JSON.stringify({kind: queryString.parse(this.props.location.search).queryKey}),
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials':true,
@@ -52,13 +52,17 @@ togglePills = tab => () => {
             var product = {
               id: data[i].id,
               name: data[i].name,
-              detail: data[i].detail
+              detail: data[i].detail,
+              category: data[i].category,
+              image: data[i].image,
+              price: data[i].price,
+              rating: data[i].rating
             }
             tmp.push(product)
           }
           this.setState({products: tmp});
           console.log(this.state)
-        })
+      })
     
   }
 
@@ -91,7 +95,7 @@ togglePills = tab => () => {
               </a>
               <MDBCardTitle>
                 <strong>
-                  <a href="/products/1">Outshine Double Crutch</a>
+                  <a href="/products/1/detail">Outshine Double Crutch</a>
                 </strong>
               </MDBCardTitle>
               <ul className="rating list-group list-unstyled justify-content-center list-group-horizontal">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_05_152144) do
+ActiveRecord::Schema.define(version: 2019_06_12_193633) do
 
   create_table "myaccounts", force: :cascade do |t|
     t.string "name"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 2019_06_05_152144) do
     t.text "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "image"
+    t.string "rating"
+    t.string "price"
+    t.string "category"
+    t.string "tag"
+    t.string "manufacturer"
+    t.string "monthly_sales"
+    t.string "review"
+    t.string "in_stock"
+    t.string "kind"
   end
 
 end

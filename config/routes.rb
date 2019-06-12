@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   		get 'personal'
   	end
   end
-  resources :products
+  resources :products do
+    member do
+      get 'detail'
+    end
+  end
   root 'welcome#index'
 
 end

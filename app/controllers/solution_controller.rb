@@ -4,7 +4,7 @@ class SolutionController < ApplicationController
 	end
 
 	def create
-		@products = Product.where("name=?", params[:name])
+		@products = Product.where("kind=?", params[:kind])
     	render json: @products
 	end
 
