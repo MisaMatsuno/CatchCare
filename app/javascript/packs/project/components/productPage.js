@@ -210,7 +210,7 @@ class Product extends React.Component {
                   </MDBListGroupItem>
                   <MDBListGroupItem className=' d-flex justify-content-between align-items-center' hover>Quantity 
                     <input placeholder = '0' style ={{width:'15%'}} className='form-control' id='quantity' onChange={this.handleChange} 
-                    type='number' value={this.state.quantity}/>                               
+                    type='number' min='0' value={this.state.quantity}/>                               
                   </MDBListGroupItem>
                 </MDBListGroup>
                 <MDBRow>
