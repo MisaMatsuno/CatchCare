@@ -9,9 +9,7 @@ import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 class Cart extends React.Component {
     
-    state = {
-        cart: []    
-    }
+    
 
 	constructor(props) {
 	
@@ -19,16 +17,24 @@ class Cart extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
         this.handleClick = this.handleClick.bind(this)
+        this.state = {
+            cart: JSON.parse(localStorage.getItem("cart")),
+            total_cost: ''
+        }
 
 	}
 
-    componentWillMount() {
+    componentDidMount() {
 
         if(localStorage.getItem("cart") === null) {
 
         }
         else {
-            this.setState({cart: JSON.parse(localStorage.getItem("cart"))});
+            var cost = 0
+            for(var i = 0; i < this.state.cart.length; i++) {
+                cost += parseInt(this.state.cart[i].price) * parseInt(this.state.cart[i].quantity)
+            }
+            this.setState({total_cost: String(cost)})
         }
 
     }
@@ -64,7 +70,7 @@ class Cart extends React.Component {
     
     render() {
 
-        if(this.state.cart.length == 0) {
+        if(this.state.cart === null || this.state.cart.length == 0) {
             return(
                 <div className = 'App'>
                     <Header></Header>
@@ -127,12 +133,17 @@ class Cart extends React.Component {
                                         <td><MDBBtn onClick = {this.handleClick} className = 'white-text' color = 'purple'>Remove</MDBBtn>
                                         </td>
                                         </tr>
-                                    
+                                
                                 );
                             })}
 
                             </MDBTableBody>
                         </MDBTable>
+                        <MDBRow className = 'justify-content-center'>
+                            <p className = 'text-center mb-4 mt-0' style = {{fontSize: '30px'}}> 
+                                Total Cost: {this.state.total_cost}$
+                            </p>
+                        </MDBRow>
                         <MDBRow className = 'dflex justify-content-right'>
                             <MDBBtn className = 'white-text' color = 'purple'>Proceed to checkout</MDBBtn>
                         </MDBRow>
