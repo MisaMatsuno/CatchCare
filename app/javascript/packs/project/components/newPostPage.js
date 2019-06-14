@@ -4,20 +4,23 @@ import Footer from './comps/Footer'
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
 class NewPost extends React.Component{
 
-  state = {
-
-    category: '',
-    title: '',
-    text: '',
-
-
-  }
+  
 
   constructor(props){
 
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.state = {
+
+    category: '',
+    title: '',
+    text: '',
+    userID: parseInt(localStorage.getItem('user')),
+
+
+    }
+    console.log(this.state.userID)
 
   }
 
@@ -42,10 +45,12 @@ class NewPost extends React.Component{
 
   handleSubmit(e){
     e.preventDefault()
+    
+
 
       fetch('/posts', {
         method: 'POST',
-        body: JSON.stringify({category: this.state.category, userID: 1, title: this.state.title, text: this.state.text, replyCount: 0}),
+        body: JSON.stringify({category: this.state.category, userID: this.state.userID, title: this.state.title, text: this.state.text, replyCount: 0}),
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Credentials':true,

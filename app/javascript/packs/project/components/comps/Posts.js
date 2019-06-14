@@ -60,7 +60,7 @@ class Posts extends React.Component {
                       <p>Replies ({replyCount})</p>
                     </MDBCol>
                     <MDBCol md = '4'>
-                      <p>{userID}</p>
+                      <p>Poster ID: {userID}</p>
                     </MDBCol>
                   </MDBRow>
                   <MDBRow style={{position:'relative', left:"40px", fontSize:'20px'}}>

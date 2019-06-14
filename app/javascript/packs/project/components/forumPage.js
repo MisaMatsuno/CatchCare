@@ -13,7 +13,12 @@ class Login extends React.Component{
   }
 
   handleClick(e){
-    this.props.history.push('/forum/new')
+    if(localStorage.user===undefined || localStorage.user===''){
+      this.props.history.push('/login')
+    }
+    else{
+      this.props.history.push('/forum/new')
+    }
   }
 	render(){
 		return(
