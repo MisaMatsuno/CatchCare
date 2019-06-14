@@ -9,24 +9,28 @@ import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 class Cart extends React.Component {
     
+    state = {
+        cart: []    
+    }
+
 	constructor(props) {
 	
 		super(props)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
         this.handleClick = this.handleClick.bind(this)
-        this.state = {
-            cart: null
-        }
-    
+
 	}
 
     componentWillMount() {
 
-        var cart_count = localStorage.cart;
-        if (cart_count!=null && cart_count!=undefined && cart_count!='0'){
-            this.setState({cart:'1'});
+        if(localStorage.getItem("cart") === null) {
+
         }
+        else {
+            this.setState({cart: JSON.parse(localStorage.getItem("cart"))});
+        }
+
     }
 	
 	handleSubmit(e) {
@@ -39,20 +43,28 @@ class Cart extends React.Component {
 
     } 
 
-    handleClick(e){
-        if(e.target.id==='redirect')this.props.history.push('/')
-        else{
-            localStorage.setItem('cart','0')
-            this.setState({cart:null})
-            alert('Removed 1 item')
-            this.props.history.push('/cart')
+    handleClick(e) {
+
+        if(e.target.id === 'redirect') {
+            this.props.history.push('/')
+        }
+        else {
+            //localStorage.setItem('cart','0')
+            //this.setState({cart:null})
+            //alert('Removed 1 item')
+            //this.props.history.push('/cart')
+
+            //remove from state
+
+            //remove from localStorage
+            var element = document.getElementById(e.target.id);
         }
 
     }
     
     render() {
 
-        if(this.state.cart === null) {
+        if(this.state.cart.length == 0) {
             return(
                 <div className = 'App'>
                     <Header></Header>
@@ -89,21 +101,36 @@ class Cart extends React.Component {
                             <MDBTableHead>
                             <tr>
                             <th>#</th>
-                            <th>Product</th>
+                            <th>Products</th>
+                            <th>Category</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th></th>
                             </tr>
                             </MDBTableHead>
                             <MDBTableBody>
-                            <tr>
-                            <td>1</td>
-                            <td>Outshine Double Crutch</td>
-                            <td>$20 </td>
-                            <td>1</td>
-                            <td><MDBBtn onClick = {this.handleClick} className = 'white-text' color = 'purple'>Remove</MDBBtn>
-                            </td>
-                            </tr>
+
+                            {this.state.cart && this.state.cart.map((product, index) => {
+                                const name = product.name
+                                const category = product.category
+                                const price = product.price
+                                const quantity = product.quantity
+
+                                return (
+                                    
+                                        <tr key = {index}>
+                                        <td>{ index + 1 }</td>
+                                        <td>{ name }</td>
+                                        <td>{ category}</td>
+                                        <td>{ price }$</td>
+                                        <td>{ quantity }</td>
+                                        <td><MDBBtn onClick = {this.handleClick} className = 'white-text' color = 'purple'>Remove</MDBBtn>
+                                        </td>
+                                        </tr>
+                                    
+                                );
+                            })}
+
                             </MDBTableBody>
                         </MDBTable>
                         <MDBRow className = 'dflex justify-content-right'>

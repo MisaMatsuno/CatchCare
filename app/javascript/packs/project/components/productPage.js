@@ -27,7 +27,7 @@ class Product extends React.Component {
 
   }
 
-  constructor(props){
+  constructor(props) {
 
     super(props)
     this.handleClick = this.handleClick.bind(this)
@@ -35,7 +35,7 @@ class Product extends React.Component {
 
   }
 
-  componentDidMount(){
+  componentDidMount() {
   
     fetch('/products/' + this.props.match.params.id, {
       method: 'GET',
@@ -69,18 +69,45 @@ class Product extends React.Component {
 
   handleClick(e){
 
-    if(e.target.id==='cart'){
-      //alert("Successfully added to your cart!")
-      alert(this.state.quantity)
-      localStorage.setItem('cart','1')
+    if(e.target.id === 'cart') {
+      if(this.state.select_category === null || this.state.select_category.length == 0) {
+        alert("Please select a category!")
+        return
+      }
+      alert("Successfully added to your cart!")
+      var product = {
+        id: this.state.id,
+        name: this.state.name,
+        category: this.state.category[this.state.select_category - 1],
+        quantity: this.state.quantity,
+        price: this.state.price
+      }
+      if(localStorage.getItem("cart") === null) {
+        var products = [];
+        products.push(product)
+        localStorage.setItem("cart", JSON.stringify(products))
+      }
+      else {
+        var products = JSON.parse(localStorage.getItem("cart"));
+        var flag = false
+        for(var i = 0; i < products.length; i++) {
+          if(products[i].id === product.id && products[i].category === product.category) {
+            products[i].quantity = String(parseInt(products[i].quantity) + parseInt(product.quantity))
+            flag = true
+            break
+          }
+        }
+        if(flag == false) {
+          products.push(product)  
+        }
+        localStorage.setItem("cart", JSON.stringify(products))  
+      }
     }
-    
   }
 
   handleChange(e){
 
     this.setState({[e.target.id]:e.target.value})
-
 
   }
 
@@ -186,7 +213,8 @@ class Product extends React.Component {
                     </span>
             </MDBListGroupItem>
              <MDBListGroupItem className=" d-flex justify-content-between align-items-center" hover>Category
-                    <select style= {{width:"50%"}}className="browser-default custom-select">
+                    <select style= {{width:"50%"}} className="browser-default custom-select" value={this.state.select_category} 
+                    onChange={this.handleChange} id="select_category">
                       <option>Choose your option</option>
                       <option value="1"> { this.state.category[0] } </option>
                       <option value="2"> { this.state.category[1] } </option>

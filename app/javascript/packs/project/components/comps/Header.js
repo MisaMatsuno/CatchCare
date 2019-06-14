@@ -26,12 +26,24 @@ class Header extends React.Component {
     if(this.props.location.pathname === '/') {
       search.style.visibility = 'hidden'
     }
-    var cart_count = localStorage.cart;
+    /*var cart_count = localStorage.cart;
     if(cart_count != null && cart_count != undefined && cart_count != '0') {
       this.setState({cart: "Cart (" + cart_count + ")"})
     }
     else {
       this.setState({cart: "Cart"})
+    }*/
+    if(localStorage.getItem("cart") === null) {
+      this.setState({cart: "Cart"})
+    }
+    else {
+      var products = JSON.parse(localStorage.getItem("cart"));
+      if(products.length === 0) {
+        this.setState({cart: "Cart"})
+      }
+      else {
+        this.setState({cart: "Cart (" + products.length + ")"})
+      }
     }
 
   }
