@@ -73,10 +73,10 @@ togglePills = tab => () => {
 			<div>
 				<Header></Header>
         <MDBContainer style={{position:"relative", top:'200px'}}>
-        <p> Search Result for ___ :</p>
+        <p> Search Result for {queryString.parse(this.props.location.search).queryKey} :</p>
         
         <Tabs defaultActiveKey="product" id="solution-tab">
-          <Tab eventKey="product" title="Product">
+          <Tab eventKey="product" title="Products">
           <MDBRow>
         <MDBCol lg="3" md="6" className="mb-lg-0 mb-4">
           <MDBCard cascade narrow ecommerce>
