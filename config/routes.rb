@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       get 'detail'
     end
   end
+
+  resources :posts
   root 'welcome#index'
 
 end

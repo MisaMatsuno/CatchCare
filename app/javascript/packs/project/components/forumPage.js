@@ -6,6 +6,15 @@ import Posts from './comps/Posts'
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
 import {Nav} from 'react-bootstrap'
 class Login extends React.Component{
+
+  constructor(props){
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(e){
+    this.props.history.push('/forum/new')
+  }
 	render(){
 		return(
 			<div>
@@ -16,28 +25,29 @@ class Login extends React.Component{
                   gradient = 'purple'
                   type="button"
                   className="white-text"
+                  onClick = {this.handleClick}
                 > Create post </MDBBtn>
 
                 
                 <Nav fill variant="tabs" defaultActiveKey="/forum">
-  	<Nav.Item>
-    <Nav.Link href="/forum">All</Nav.Link>
-  </Nav.Item>
-  <Nav.Item>
-    <Nav.Link eventKey="Link-1">New Findings</Nav.Link>
-  </Nav.Item>
-  <Nav.Item>
-    <Nav.Link eventKey="Link-2">Social Activities</Nav.Link>
-  </Nav.Item>
-  <Nav.Item>
-    <Nav.Link eventKey="Link-3">Shared Experience and Ideas</Nav.Link>
-  </Nav.Item>
-  <Nav.Item>
-    <Nav.Link eventKey="Link-4">Polls</Nav.Link>
-  </Nav.Item>
-</Nav>
+                  	<Nav.Item>
+                    <Nav.Link href="/forum">All</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="Link-1">New Findings</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="Link-2">Social Activities</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="Link-3">Shared Experience and Ideas</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="Link-4">Polls</Nav.Link>
+                  </Nav.Item>
+                </Nav>
 
-<Posts></Posts>
+              <Posts></Posts>
 
         		</MDBContainer>
 			<div style={{position: 'relative', top:'300px', width:"100%"}}>

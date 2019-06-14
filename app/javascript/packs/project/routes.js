@@ -12,6 +12,7 @@ import Personal from './components/personalPage'
 import Signup from './components/signUpPage'
 import Cart from './components/cartPage'
 import Product from './components/productPage'
+import NewPost from './components/newPostPage'
 
 const App = (props) => (
   <Router>
@@ -26,6 +27,7 @@ const App = (props) => (
       <Route exact path='/myaccount/new' component={Signup} />
       <Route exact path='/cart' component={Cart} /> 
       <Route exact path='/products/:id/detail' component={Product} /> 
+      <Route exact path='/forum/new' component={NewPost} />
 
     </div>
   </Router>
