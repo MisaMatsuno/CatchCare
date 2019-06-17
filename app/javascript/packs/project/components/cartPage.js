@@ -54,16 +54,17 @@ class Cart extends React.Component {
         if(e.target.id === 'redirect') {
             this.props.history.push('/')
         }
-        else {
+        else if(e.target.id === 'remove') {
             //localStorage.setItem('cart','0')
             //this.setState({cart:null})
             //alert('Removed 1 item')
             //this.props.history.push('/cart')
 
             //remove from state
-
+            
             //remove from localStorage
-            var element = document.getElementById(e.target.id);
+            //var element = document.getElementById(e.target.id);
+            //alert(e.target.value)
         }
 
     }
@@ -125,13 +126,14 @@ class Cart extends React.Component {
                                 return (
                                     
                                         <tr key = { index }>
-                                        <td>{ index + 1 }</td>
-                                        <td>{ name }</td>
-                                        <td>{ category }</td>
-                                        <td>{ price }$</td>
-                                        <td>{ quantity }</td>
-                                        <td><MDBBtn onClick = { this.handleClick } className = 'white-text' color = 'purple'>Remove</MDBBtn>
-                                        </td>
+                                            <td>{ index + 1 }</td>
+                                            <td>{ name }</td>
+                                            <td>{ category }</td>
+                                            <td>{ price }$</td>
+                                            <td>{ quantity }</td>
+                                            <td>
+                                                <MDBBtn onClick = { this.handleClick } className = 'white-text' color = 'purple' id = 'remove' value = {index}>Remove</MDBBtn>
+                                            </td>
                                         </tr>
                                 
                                 );
