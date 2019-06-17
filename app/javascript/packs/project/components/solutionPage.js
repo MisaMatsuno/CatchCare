@@ -7,6 +7,7 @@ import Search from './comps/Search'
 import queryString from 'query-string'
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardFooter, MDBIcon, MDBTooltip,  MDBBadge, MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBBtn } from 'mdbreact';
 import {Tabs, Tab, TabContainer, TabContent, TabPane } from 'react-bootstrap'
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 
 class Solution extends React.Component{
@@ -14,8 +15,8 @@ class Solution extends React.Component{
   state = {
 
     activeItemPills: '1',
-    products: []
-
+    products: [],
+    tips: []
   }
 
   constructor(props){
@@ -74,6 +75,31 @@ class Solution extends React.Component{
           //console.log(this.state)
       })
     
+    fetch('/tips', {
+      method: 'POST',
+      body: JSON.stringify({message: queryString.parse(this.props.location.search).queryKey}),
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials':true,
+        'Access-Control-Allow-Methods':'POST, GET',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => 
+        res.json())
+        .then(data => {
+          var tmp = []
+          for(var i = 0; i < data.length; i++) {
+            var tip = {
+              id: data[i].id,
+              message: data[i].message,
+              rating: data[i].rating
+            }
+            tmp.push(tip)
+          }
+          this.setState({tips: tmp});
+          //console.log(this.state.tips)
+        })
+
   }
 
 	render(){
@@ -90,7 +116,7 @@ class Solution extends React.Component{
                 const photo = product.image.split(' ')[0]
                 const id = product.id
                 return (
-                  <MDBCol lg = '5' md = '5' className = 'mb-lg-0 mb-4'>
+                  <MDBCol lg = '5' md = '5' className = 'mb-lg-0 mb-4' key = {index}>
                     <MDBCard cascade narrow ecommerce>
                       <a href = {'/products/' + product.id + '/detail'}>
                         <MDBCardImage
@@ -112,7 +138,7 @@ class Solution extends React.Component{
                           </strong>
                         </MDBCardTitle>
                         <ul className = 'rating list-group list-unstyled justify-content-center list-group-horizontal'>
-                          <StarRatingComponent name = 'rate' starCount = {5} value = {product.rating}/>
+                          <StarRatingComponent name = 'rate' starCount = { 5 } value = { parseFloat(product.rating) }/>
                         </ul>
                         <MDBCardText>
                           { product.detail }
@@ -130,7 +156,28 @@ class Solution extends React.Component{
             </MDBRow>
             </Tab>
             <Tab eventKey = 'tips' title = 'Tips'>
-              
+              <MDBContainer style = {{position:'relative', top:'10px'}}>
+                <MDBTable hover>
+                  <MDBTableHead>
+                    <tr>
+                    <th>#</th>
+                    <th>Tips</th>
+                    <th>Rating</th>
+                    </tr>
+                  </MDBTableHead>
+                  <MDBTableBody>
+                    {this.state.tips && this.state.tips.map((tip, index) => {
+                      return (              
+                        <tr key = {index}>
+                          <td>{ index + 1 }</td>
+                          <td>{ tip.message }</td>
+                          <td><StarRatingComponent name = 'rate' starCount = { 5 } value = { parseFloat(tip.rating) }/></td>
+                        </tr>        
+                      );
+                    })} 
+                  </MDBTableBody>
+                </MDBTable>
+              </MDBContainer>
             </Tab>
             <Tab eventKey = 'designs' title = 'Designs'>
               <Search></Search>

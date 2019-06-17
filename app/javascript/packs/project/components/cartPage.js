@@ -124,13 +124,13 @@ class Cart extends React.Component {
 
                                 return (
                                     
-                                        <tr key = {index}>
+                                        <tr key = { index }>
                                         <td>{ index + 1 }</td>
                                         <td>{ name }</td>
-                                        <td>{ category}</td>
+                                        <td>{ category }</td>
                                         <td>{ price }$</td>
                                         <td>{ quantity }</td>
-                                        <td><MDBBtn onClick = {this.handleClick} className = 'white-text' color = 'purple'>Remove</MDBBtn>
+                                        <td><MDBBtn onClick = { this.handleClick } className = 'white-text' color = 'purple'>Remove</MDBBtn>
                                         </td>
                                         </tr>
                                 

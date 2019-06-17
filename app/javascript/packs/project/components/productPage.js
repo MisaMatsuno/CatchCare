@@ -130,7 +130,7 @@ class Product extends React.Component {
               <div className = 'row'>
                 {this.state.image && this.state.image.map((image, index) => {
                   return (
-                    <div className = 'col-lg-2 col-md-2 col-sm-2 mb-2 waves-effect hoverable'>
+                    <div className = 'col-lg-2 col-md-2 col-sm-2 mb-2 waves-effect hoverable' key = { index }> 
                       <img onClick = {(event) => imageClick(event)} src = { image } className = 'img-fluid z-depth-1' alt = 'Responsive image'/>
                     </div>
                   );
@@ -152,7 +152,7 @@ class Product extends React.Component {
                   </MDBListGroupItem>
                   <MDBListGroupItem className = 'd-flex justify-content-between align-items-center' hover>Rating
                     <ul className = 'list-group list-group-horizontal list-unstyled'>
-                      <StarRatingComponent name = 'rate' starCount = {5} value = {this.state.rating}/>
+                      <StarRatingComponent name = 'rate' starCount = { 5 } value = { parseFloat(this.state.rating) }/>
                     </ul>
                   </MDBListGroupItem>
                   <MDBListGroupItem className = 'd-flex justify-content-between align-items-center' hover>Manufacturer
@@ -181,7 +181,7 @@ class Product extends React.Component {
                       <option>Choose your option</option>
                       {this.state.category && this.state.category.map((category, index) => {
                         return (
-                          <option value = {index + 1}> { category } </option>
+                          <option value = {index + 1} key = { index }> { category } </option>
                         );
                       })}
                     </select>
