@@ -130,7 +130,7 @@ class Solution extends React.Component{
             </MDBRow>
             </Tab>
             <Tab eventKey = 'tips' title = 'Tips'>
-              <Search></Search>
+              
             </Tab>
             <Tab eventKey = 'designs' title = 'Designs'>
               <Search></Search>

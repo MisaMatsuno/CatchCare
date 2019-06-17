@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_14_190512) do
+ActiveRecord::Schema.define(version: 2019_06_17_211531) do
 
   create_table "myaccounts", force: :cascade do |t|
     t.string "name"
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 2019_06_14_190512) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_replies_on_post_id"
+  end
+
+  create_table "tips", force: :cascade do |t|
+    t.text "message"
+    t.string "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
