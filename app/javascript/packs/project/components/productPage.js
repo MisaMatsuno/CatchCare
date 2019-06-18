@@ -72,39 +72,72 @@ class Product extends React.Component {
   handleClick(e){
 
     if(e.target.id === 'cart') {
-      if(this.state.select_category === null || this.state.select_category.length == 0) {
-        alert('Please select a category!')
-        return
-      }
-      alert('Successfully added to your cart!')
-      var product = {
-        id: this.state.id,
-        name: this.state.name,
-        category: this.state.category[this.state.select_category - 1],
-        quantity: this.state.quantity,
-        price: this.state.price
-      }
-      if(localStorage.getItem('cart') === null) {
-        var products = [];
-        products.push(product)
-        localStorage.setItem('cart', JSON.stringify(products))
-      }
-      else {
-        var products = JSON.parse(localStorage.getItem('cart'));
-        var flag = false
-        for(var i = 0; i < products.length; i++) {
-          if(products[i].id === product.id && products[i].category === product.category) {
-            products[i].quantity = String(parseInt(products[i].quantity) + parseInt(product.quantity))
-            flag = true
-            break
+      if(localStorage.user == null || localStorage.user == undefined || localStorage.user == '') {
+        if(this.state.select_category === null || this.state.select_category.length == 0) {
+          alert('Please select a category!')
+          return
+        }
+        alert('Successfully added to cart!')
+        var product = {
+          id: this.state.id,
+          name: this.state.name,
+          category: this.state.category[this.state.select_category - 1],
+          quantity: this.state.quantity,
+          price: this.state.price
+        }
+        if(localStorage.getItem('cart') === null) {
+          var products = [];
+          products.push(product)
+          localStorage.setItem('cart', JSON.stringify(products))
+        }
+        else {
+          var products = JSON.parse(localStorage.getItem('cart'));
+          var flag = false
+          for(var i = 0; i < products.length; i++) {
+            if(products[i].id === product.id && products[i].category === product.category) {
+              products[i].quantity = String(parseInt(products[i].quantity) + parseInt(product.quantity))
+              flag = true
+              break
+            }
           }
+          if(flag == false) {
+            products.push(product)  
+          }
+          localStorage.setItem('cart', JSON.stringify(products))  
         }
-        if(flag == false) {
-          products.push(product)  
+      }
+      else { // user have already log in
+        if(this.state.select_category === null || this.state.select_category.length == 0) {
+          alert('Please select a category!')
+          return
         }
-        localStorage.setItem('cart', JSON.stringify(products))  
+        fetch('/cart', {
+          method: 'POST',
+          body: JSON.stringify({
+                                myaccount_id: localStorage.user,
+                                name: this.state.name, 
+                                category: this.state.category[this.state.select_category - 1], 
+                                quantity: this.state.quantity,
+                                price: this.state.price}),
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Methods': 'POST, GET',
+            'Content-Type': 'application/json'
+          }
+        }).then(res => 
+            res.json())
+            .then(data => {
+              if(data.state === 'OK'){
+                alert(data.message);
+              }
+              else{
+                alert(data.message);
+              }
+          })
       }
     }
+
   }
 
   handleChange(e){
@@ -188,7 +221,7 @@ class Product extends React.Component {
                   </MDBListGroupItem>
                   <MDBListGroupItem className = 'd-flex justify-content-between align-items-center' hover>Quantity 
                     <input placeholder = '0' style = {{width:'15%'}} className = 'form-control' id = 'quantity' onChange={this.handleChange} 
-                    type = 'number' min = '0' value = {this.state.quantity}/>                               
+                    type = 'number' min = '1' value = {this.state.quantity}/>                               
                   </MDBListGroupItem>
                 </MDBListGroup>
                 <MDBRow>

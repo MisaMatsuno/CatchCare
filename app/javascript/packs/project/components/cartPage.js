@@ -8,8 +8,6 @@ import {MDBCard, MDBCarousel, MDBListGroup, MDBListGroupItem,MDBCarouselCaption,
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 class Cart extends React.Component {
-    
-    
 
 	constructor(props) {
 	
@@ -25,17 +23,34 @@ class Cart extends React.Component {
 	}
 
     componentDidMount() {
+        //if(localStorage.user == null || localStorage.user == undefined || localStorage.user == '') { 
+            if(localStorage.getItem("cart") === null) {
 
-        if(localStorage.getItem("cart") === null) {
-
-        }
-        else {
-            var cost = 0
-            for(var i = 0; i < this.state.cart.length; i++) {
-                cost += parseInt(this.state.cart[i].price) * parseInt(this.state.cart[i].quantity)
             }
-            this.setState({total_cost: String(cost)})
-        }
+            else {
+                var cost = 0
+                for(var i = 0; i < this.state.cart.length; i++) {
+                    cost += parseInt(this.state.cart[i].price) * parseInt(this.state.cart[i].quantity)
+                }
+                this.setState({total_cost: String(cost)})
+            }
+        //}
+        //else {
+            /*fetch('/cart', {
+                method: 'POST',
+                body: JSON.stringify({myaccount_id: localStorage.user}),
+                headers: {
+                  'Access-Control-Allow-Origin': '*',
+                  'Access-Control-Allow-Credentials': true,
+                  'Access-Control-Allow-Methods': 'POST, GET',
+                  'Content-Type': 'application/json'
+                }
+              }).then(res => 
+                  res.json())
+                  .then(data => {
+                    
+                  })*/
+        //}
 
     }
 	
@@ -61,14 +76,18 @@ class Cart extends React.Component {
             //this.props.history.push('/cart')
 
             //remove from state
-            
+            //this.setState({cart: arrayRemove(this.state.cart, e.target.value)})
+            //delete this.state.cart[e.target.value]
+            //console.log(this.state.cart)
             //remove from localStorage
+            //localStorage.setItem('cart', JSON.stringify(this.state.cart)) 
+            //var products = JSON.parse(localStorage.getItem('cart'));
             //var element = document.getElementById(e.target.id);
-            //alert(e.target.value)
+            alert(e.target.value)
         }
 
     }
-    
+
     render() {
 
         if(this.state.cart === null || this.state.cart.length == 0) {
