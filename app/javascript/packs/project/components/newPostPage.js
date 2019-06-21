@@ -4,27 +4,21 @@ import Footer from './comps/Footer'
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
 class NewPost extends React.Component{
 
-  
-
-  constructor(props){
+  constructor(props) {
 
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.state = {
-
-    category: '',
-    title: '',
-    text: '',
-    userID: parseInt(localStorage.getItem('user')),
-
-
+      category: '',
+      title: '',
+      text: '',
+      userID: parseInt(localStorage.getItem('user')),
     }
-    console.log(this.state.userID)
 
   }
 
-  handleChange(e){
+  handleChange(e) {
 
     if(e.target.id === 'category' ){
       this.setState({category:e.target.value})
@@ -43,17 +37,16 @@ class NewPost extends React.Component{
 
   }
 
-  handleSubmit(e){
+  handleSubmit(e) {
+
     e.preventDefault()
-    
-
-
-      fetch('/posts', {
+    console.log(this.state)
+    fetch('/posts', {
         method: 'POST',
         body: JSON.stringify({category: this.state.category, userID: this.state.userID, title: this.state.title, text: this.state.text, replyCount: 0}),
         headers: {
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials':true,
+            'Access-Control-Allow-Credentials': true,
             'Access-Control-Allow-Methods':'POST, GET',
             "Content-Type": "application/json"
         }
@@ -67,11 +60,10 @@ class NewPost extends React.Component{
             alert(data.message);
           }
         })
-    
-      
+        
   }
 
-	render(){
+	render() {
 
 		return(
 			<div>

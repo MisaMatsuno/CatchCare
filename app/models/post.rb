@@ -1,4 +1,4 @@
 class Post < ApplicationRecord
 	has_many :replies
-	validates :title, presense: true
+	validates :title, :presence=>true
 end

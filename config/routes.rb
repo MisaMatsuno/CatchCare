@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   resources :login
   resources :solution
-  resources :forum
+  resources :forum do
+    member do
+      get 'postdetail'
+    end
+  end
   resources :designer
   resources :cart do
     member do
@@ -25,6 +29,8 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :tips
+  resources :replies
+  resources :addreply
   root 'welcome#index'
 
 end

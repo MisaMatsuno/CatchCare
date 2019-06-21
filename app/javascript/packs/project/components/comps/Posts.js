@@ -2,20 +2,25 @@ import React from 'react';
 import {withRouter} from 'react-router-dom'
 import { MDBTable, MDBTableBody, MDBTableHead, MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 class Posts extends React.Component {
-  constructor(props){
+
+  constructor(props) {
+
     super(props)
-    this.handleClick=this.handleClick.bind(this)
-    this.state={
+    this.handleClick = this.handleClick.bind(this)
+    this.state = {
       data: null
     }
-  }
-
-  handleClick(e){
-    alert('clicked!')
 
   }
 
-  componentDidMount(){
+  handleClick(e) {
+
+    alert(e.target.value)
+
+  }
+
+  componentDidMount() {
+
     fetch('/posts', {
       method: 'GET',
       headers: {
@@ -25,22 +30,21 @@ class Posts extends React.Component {
           "Content-Type": "application/json"
       }
     }).then(res => 
-    //{if(res.status===404){
-    //    alert("Wrong Account");
-    //    this.props.history.push('/login');
-    //  }
       res.json())
       .then(data => {
-            console.log(data)
-            this.setState({data:data})
-          
+        this.setState({data: data})
+        console.log(this.state.data)
       })
-    
-    
+      
   }
- 
   
   render() {
+
+    const formatDate = (string) => {
+      var options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(string).toLocaleDateString([],options);
+    } 
+
     return(
 
     	<MDBTable hover>
@@ -50,11 +54,11 @@ class Posts extends React.Component {
           const text = post.text
           const userID = post.userID.toString()
           const replyCount = post.replyCount.toString()
-          const updated_at = post.updated_at
+          const updated_at = formatDate(post.updated_at.toString())
           return (
-            <tr onClick = {this.handleClick}>
-              <td>
-                <MDBContainer className='container-fluid' style = {{width:'100%'}}>
+            <tr onClick = {this.handleClick} key = {id} value = {id}>
+              <td> 
+                <MDBContainer className = 'container-fluid' style = {{width:'100%'}}>
                   <MDBRow className = 'justify-content-between align-items-center' md = '12'>
                     <MDBCol md = '4'>
                       <p>Replies ({replyCount})</p>
@@ -63,26 +67,24 @@ class Posts extends React.Component {
                       <p>Poster ID: {userID}</p>
                     </MDBCol>
                   </MDBRow>
-                  <MDBRow style={{position:'relative', left:"40px", fontSize:'20px'}}>
+                  <MDBRow style = {{position:'relative', left:"40px", fontSize:'20px'}}>
                     <strong>{title}</strong>
                   </MDBRow>
-                  <MDBRow style={{position:'relative', left:"40px"}}>
+                  <MDBRow style = {{position:'relative', left:"40px"}}>
                     <strong>{text}</strong>
                   </MDBRow>
                 </MDBContainer>
-                </td>
-                <td>
+              </td>
+              <td>
                 Latest Comment Time: {updated_at}
-                </td>
-              </tr>
-            )
-        })}
-        
-        
+              </td>
+            </tr>
+          )
+      })}  
       </MDBTableBody>
-    </MDBTable>
-      
+    </MDBTable>    
     )
+
   }
 }
 export default Posts;

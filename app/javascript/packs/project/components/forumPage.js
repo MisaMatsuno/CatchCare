@@ -5,22 +5,28 @@ import Search from './comps/Search'
 import Posts from './comps/Posts'
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
 import {Nav} from 'react-bootstrap'
-class Login extends React.Component{
 
-  constructor(props){
+class Forum extends React.Component {
+
+  constructor(props) {
+
     super(props)
     this.handleClick = this.handleClick.bind(this)
+
   }
 
-  handleClick(e){
-    if(localStorage.user===undefined || localStorage.user===''){
+  handleClick(e) {
+
+    if(localStorage.user === undefined || localStorage.user === ''){
       this.props.history.push('/login')
     }
     else{
       this.props.history.push('/forum/new')
     }
+
   }
 	render(){
+
 		return(
 			<div>
 				<Header></Header>
@@ -59,7 +65,8 @@ class Login extends React.Component{
     			<Footer></Footer>
     		</div>
     		</div>
-			)
+      )
+      
 	}
 }
-export default Login
+export default Forum
